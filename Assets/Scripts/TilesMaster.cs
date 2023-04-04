@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class TilesMaster
 {
-    static TileInfo[] allTiles =
+    public static TileInfo[] allTiles =
     {
         // 0: NEGATIVE SPACE!
         new TileInfo("", 

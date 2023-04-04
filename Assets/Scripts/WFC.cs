@@ -10,11 +10,29 @@ public class WFC : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < 20; i++)
+        BuildLevel();
+        // Random Tile
+        // Assign
+        // Update Neighbors' Superpositions.
+        //          and so forth, updating entropy along the way
+        // Determine next lowest entropy.
+        // start again!
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    void BuildLevel()
+    {
+        for (int i = 0; i < 20; i++)
         {
-            for(int j = 0; j < 32; j++)
+            for (int j = 0; j < 32; j++)
             {
-                Tile t = Instantiate(tile, new Vector2(j * spawnOffset,i * spawnOffset), 
+                Tile t = Instantiate(tile, new Vector2(j * spawnOffset, i * spawnOffset),
                     Quaternion.identity).GetComponent<Tile>();
                 tileArray[j, i] = t;
                 if (i == 0)
@@ -23,14 +41,11 @@ public class WFC : MonoBehaviour
                     {
                         t.superpositions = (j == 0 ? new List<short>() { 0, 2, 10 } :
                             new List<short>() { 0, 4, 11 });
-                        t.GetComponent<SpriteRenderer>().color = Color.cyan;
                     }
                     else
                     {
                         t.superpositions = new List<short> { 0, 2, 3, 4, 10, 11 };
-                        t.GetComponent<SpriteRenderer>().color = Color.blue;
                     }
-                    continue;
                 }
                 else if (i == 19)
                 {
@@ -38,14 +53,11 @@ public class WFC : MonoBehaviour
                     {
                         t.superpositions = (j == 0 ? new List<short>() { 0, 6, 12 } :
                             new List<short>() { 0, 9, 13 });
-                        t.GetComponent<SpriteRenderer>().color = Color.magenta;
                     }
                     else
                     {
                         t.superpositions = new List<short> { 0, 7, 8, 9, 12, 13 };
-                        t.GetComponent<SpriteRenderer>().color = Color.red;
                     }
-                    continue;
                 }
                 else
                 {
@@ -54,17 +66,27 @@ public class WFC : MonoBehaviour
                         t.superpositions = (j == 0 ?
                             new List<short>() { 0, 2, 5, 7, 10, 12 } :
                             new List<short>() { 0, 4, 6, 9, 11, 13 });
-                        t.GetComponent<SpriteRenderer>().color = Color.yellow;
                     }
                 }
-                
+
+                AssignNeighbors(t,j,i);
+
             }
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void AssignNeighbors(Tile t, int x, int y)
     {
-        
+        if(x - 1 > 0)
+        {
+            t.neighbors[3] = tileArray[x - 1, y];
+            tileArray[x - 1, y].neighbors[1] = t;
+        }
+
+        if(y - 1 > 0)
+        {
+            t.neighbors[0] = tileArray[x, y - 1];
+            tileArray[x, y - 1].neighbors[2] = t;
+        }
     }
 }
