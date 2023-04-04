@@ -133,10 +133,40 @@ public static class TilesMaster
             new List<short>{1,8,14,15,18,19},
             new List<short>{1,5,15,17,18,19})
     };
+
+
+
     // Start is called before the first frame update
     static void Start()
     {
         
+    }
+
+    /// <summary>
+    /// Given two Tiles, returns 0 if the entropy of both 
+    /// Tiles is equal, -1 if the new Tile is less, and 1 
+    /// if the currently selected Tile still has the 
+    /// least entropy.
+    /// </summary>
+    /// <param name="current">Currently the Tile with the lowest entropy.</param>
+    /// <param name="other">A new challenger!</param>
+    /// <returns>-1, 0, or 1 depending on whether the new Tile 
+    /// has less, equal, or greater entropy than the current.</returns>
+    public static int CompareEntropy(Tile current, Tile other)
+    {
+        if (current == null)
+        {
+            return -1;
+        }
+
+        if(other.entropy <= current.entropy)
+        {
+            return (current.entropy == other.entropy) ? 0 : -1;
+        }
+        else
+        {
+            return 1;
+        }
     }
 
 }
@@ -158,16 +188,4 @@ public class TileInfo
         if (south != null) { rules[2] = south; }
         if (west  != null) { rules[3] = west ; }
     }
-}
-
-/// <summary>
-/// This is the actual Tile that will be spawned into the level
-///     on Start.
-/// </summary>
-public class Tile
-{
-    public bool collapsed;
-    public TileInfo thisTile;
-    public int entropy;
-    public List<short> superpositions;
 }
