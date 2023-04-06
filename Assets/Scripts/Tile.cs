@@ -11,8 +11,7 @@ public class Tile : MonoBehaviour
     public bool collapsed = false;
 
     public List<short> superpositions = new List<short>() { 
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
-        11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
     public List<short>[] candidates =
     {
         new List<short>(){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20},
@@ -46,12 +45,12 @@ public class Tile : MonoBehaviour
     {
         bool changed = false;
 
-        for(int i = newOnes.Count; i > 0 ; i--)
+        for(int i = superpositions.Count; i > 0 ; i--)
         {
-            Debug.LogFormat("<color=yellow>SUPERPOS: {0}, NEWONES: {1}</color>", superpositions.Count, newOnes.Count);
-            if (!superpositions.Contains(newOnes[i - 1]))
+            Debug.LogFormat("<color=yellow>{2} :: SUPERPOS: {0}, NEWONES: {1}</color>", superpositions.Count, newOnes.Count, this.name);
+            if (!newOnes.Contains(superpositions[i - 1]))
             {
-                superpositions.Remove(newOnes[i - 1]);
+                superpositions.RemoveAt(i - 1);
                 changed = true;
             }
         }
@@ -74,6 +73,7 @@ public class Tile : MonoBehaviour
         if(!collapsed)
         {
             Debug.Log(this.name + " is Collapsing!");
+            Debug.LogWarning("SUPERPOS: " + superpositions.Count);
             collapsed = true;
             short choice = -1;
 
@@ -97,6 +97,7 @@ public class Tile : MonoBehaviour
                         if (!possible)
                         {
                             superpositions.RemoveAt(a);
+                            Debug.LogWarning("SUPERPOS: " + superpositions.Count);
                         }
                     }
                 }
@@ -117,7 +118,7 @@ public class Tile : MonoBehaviour
             }
             else
             {
-
+                Debug.LogErrorFormat("SUPERPOSITIONS FOR {0} ARE ZERO!", this.name);
             }
 
             if(choice > 0)
