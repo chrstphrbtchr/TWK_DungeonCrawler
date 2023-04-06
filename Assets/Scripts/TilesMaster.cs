@@ -134,14 +134,6 @@ public static class TilesMaster
             new List<short>{1,5,15,17,18,19})
     };
 
-
-
-    // Start is called before the first frame update
-    static void Start()
-    {
-        
-    }
-
     /// <summary>
     /// Given two Tiles, returns 0 if the entropy of both 
     /// Tiles is equal, -1 if the new Tile is less, and 1 
