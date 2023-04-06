@@ -8,7 +8,7 @@ public class Tile : MonoBehaviour
     public TileInfo thisTile;
 
     public int entropy;
-    public bool collapsed = false;
+    public bool collapsed = false, recentlyChanged = false;
 
     public List<short> superpositions = new List<short>() { 
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
@@ -26,7 +26,8 @@ public class Tile : MonoBehaviour
     public int GetEntropy() => entropy;
     public void FindEntropy()
     {
-        entropy = superpositions.Count - 1;
+        entropy = superpositions.Count;
+
         if(entropy == 1)
         {
             AssignSprite(TilesMaster.allTiles[superpositions[0]].tileNumber);
@@ -55,9 +56,10 @@ public class Tile : MonoBehaviour
     {
         if(!collapsed)
         {
+            Debug.Log(this.name + " is Collapsing!");
             collapsed = true;
 
-            int rnd = Random.Range(0, superpositions.Count - 1);
+            int rnd = Random.Range(0, superpositions.Count);
             short choice = superpositions[rnd];
 
             thisTile = TilesMaster.allTiles[choice];
@@ -71,16 +73,20 @@ public class Tile : MonoBehaviour
 
     void AssignSprite(string s)
     {
-        sprite.sprite = Resources.Load<Sprite>(
-                "Tiles/BaseTiles/colored-transparent_packed_" + s + ".asset");
+        this.name = s;
+        sprite.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f,1f));
+        //sprite.sprite = Resources.Load<Sprite>(
+         //       "Tiles/colored-transparent_packed_" + s);
+        print("ASSIGNED " + s + " TILE!");
     }
 
     void UpdateNeighbors()
     {
-        List<short>[] candidates = { new List<short>(),new 
+        recentlyChanged = true;
+        List<List<short>> candidates = new List<List<short>>(){ new List<short>(),new 
                 List<short>(), new List<short>(), new List<short>()};
 
-        for(int a = 0; a < superpositions.Count - 1; a++)
+        for(int a = 0; a < superpositions.Count; a++)
         {
             TileInfo info = TilesMaster.allTiles[superpositions[a]];
 
@@ -88,17 +94,17 @@ public class Tile : MonoBehaviour
             {
                 if (neighbors[x] != null)
                 {
-                    if (!neighbors[x].collapsed)
+                    if (!neighbors[x].collapsed && !neighbors[x].recentlyChanged)
                     {
-                        for (int b = 0; b < info.rules[x].Count - 1; b++)
+                        for (int b = 0; b < info.rules[x].Count; b++)
                         {
                             // check north
                             if (!candidates[x].Contains(info.rules[x][b]))
                             {
                                 candidates[x].Add(info.rules[x][b]);
                             }
-                            Debug.Log("<color=cyan>" + candidates[x].Count + "</color>");
                         }
+                        Debug.Log("<color=cyan>" + candidates[x].Count + "</color>");
                     }
                 }
             }
@@ -108,12 +114,13 @@ public class Tile : MonoBehaviour
         {
             if (neighbors[y] != null)
             {
-                if (!neighbors[y].collapsed)
+                if (!neighbors[y].collapsed && !neighbors[y].recentlyChanged)
                 {
                     neighbors[y].RecalculateSuperpositions(candidates[y]);
                 }
             }
         }
-
     }
 }
+// maybe do it all fr wfc instead of indiv tiles??
+// check new list vs old list, stop search if same
