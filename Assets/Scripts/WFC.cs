@@ -1,21 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WFC : MonoBehaviour
 {
     const float spawnOffset = 0.5f;
-    const int xLen = 32, yLen = 20;
+    const int xLen = 8, yLen = 8;
 
     int times = xLen * yLen;
+    [SerializeField] Sprite[] allSprites;
+    static Sprite[] staticAllSprites; // THIS SUCKS.
     
     public GameObject tile;
     public Tile[,] tileArray = new Tile[xLen, yLen];
 
     void Start()
     {
+        staticAllSprites = allSprites;
         BuildLevel();
         WaveFunctionCollapse();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void BuildLevel()
@@ -26,7 +38,7 @@ public class WFC : MonoBehaviour
             {
                 Tile t = Instantiate(tile, new Vector2(x * spawnOffset, y * spawnOffset),
                     Quaternion.identity).GetComponent<Tile>();
-                t.name = "Tile " + x + "-" + y;
+                t.name = "Tile [" + x + ", " + y + "]";
                 tileArray[x, y] = t;
 
                 if (y == yLen - 1)
@@ -64,7 +76,6 @@ public class WFC : MonoBehaviour
                 }
 
                 AssignNeighbors(t,x,y);
-
             }
         }
     }
@@ -92,7 +103,7 @@ public class WFC : MonoBehaviour
 
         if (firstTime)
         {
-            candidates.Add(tileArray[Random.Range(0, xLen), Random.Range(0,yLen)]);
+            candidates.Add(tileArray[Random.Range(1, xLen - 1), Random.Range(1 ,yLen - 1)]);
         }
         else
         {
@@ -102,15 +113,13 @@ public class WFC : MonoBehaviour
                 {
                     if (!tileArray[j,i].collapsed)
                     {
-                        Debug.Log("NOT TRUE");
+                        tileArray[j, i].recentlyChanged = false;
                         if (candidates.Count == 0)
                         {
                             candidates.Add(tileArray[j, i]);
-                            Debug.Log("<color=purple>CANDIDATE</color>: " + j + " " + i);
                         }
                         else
                         {
-                            Debug.Log("<color=orange>PRE_CANDIDATES.COUNT: </color>" + candidates.Count);
                             if (candidates[0].GetEntropy() >= tileArray[j, i].GetEntropy())
                             {
                                 if (candidates[0].GetEntropy() > tileArray[j, i].GetEntropy())
@@ -118,7 +127,6 @@ public class WFC : MonoBehaviour
                                     candidates.Clear();
                                 }
                                 candidates.Add(tileArray[j, i]);
-                                Debug.Log("<color=green>MID_CANDIDATES.COUNT: </color>" + candidates.Count);
                             }
                         }
                     }
@@ -146,5 +154,10 @@ public class WFC : MonoBehaviour
             t.CollapseTile();
             Debug.Log("<color=yellow>TEMP: " + temp + "!</color>");
         }
+    }
+
+    public static void ChangeTile(Tile t, short num)
+    {
+        t.sprite.sprite = staticAllSprites[num];
     }
 }

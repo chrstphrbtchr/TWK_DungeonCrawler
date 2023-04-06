@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Pkcs;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public TileInfo thisTile;
-
     public int entropy;
     public bool collapsed = false, recentlyChanged = false;
 
@@ -16,7 +15,7 @@ public class Tile : MonoBehaviour
 
     public Tile[] neighbors = new Tile[4];
 
-    SpriteRenderer sprite;
+    public SpriteRenderer sprite;
 
     void Awake()
     {
@@ -30,7 +29,7 @@ public class Tile : MonoBehaviour
 
         if(entropy == 1)
         {
-            AssignSprite(TilesMaster.allTiles[superpositions[0]].tileNumber);
+            AssignSprite(TilesMaster.allTiles[superpositions[Random.Range(0, superpositions.Count)]].tileIndex);
             CollapseTile();
         }
         UpdateNeighbors();
@@ -58,25 +57,25 @@ public class Tile : MonoBehaviour
         {
             Debug.Log(this.name + " is Collapsing!");
             collapsed = true;
+            short choice = 0;
 
-            int rnd = Random.Range(0, superpositions.Count);
-            short choice = superpositions[rnd];
+            if(superpositions.Count > 0)
+            {
+                int rnd = Random.Range(0, superpositions.Count);
+                choice = superpositions[rnd];
+                superpositions.Clear();
+                superpositions.Add(choice);
+            }
 
-            thisTile = TilesMaster.allTiles[choice];
-            superpositions.Clear();
-            superpositions.Add(choice);
-
-            AssignSprite(thisTile.tileNumber);
+            AssignSprite(choice);
             UpdateNeighbors();
         }
     }
 
-    void AssignSprite(string s)
+    void AssignSprite(short s)
     {
-        this.name = s;
-        sprite.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f,1f));
-        //sprite.sprite = Resources.Load<Sprite>(
-         //       "Tiles/colored-transparent_packed_" + s);
+        this.name += " - " + s;
+        WFC.ChangeTile(this, s);        // I HATE THIS. BUT, FOR TESTING, I'LL LIVE...
         print("ASSIGNED " + s + " TILE!");
     }
 

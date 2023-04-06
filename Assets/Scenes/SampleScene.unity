@@ -501,6 +501,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c74d8fdba435cc4f9b223fbbbf43437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allSprites:
+  - {fileID: -1667215209, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: -1667215209, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: -1880440570, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: -705084422, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: 846654900, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: 2130670333, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: 1661467284, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: -746884681, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: 356075624, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: 1096695363, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: 1876464729, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: 1764811784, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: -556609486, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: -1996070234, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: -486084544, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: 458913542, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: -1363329131, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: 534002065, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: -1987938715, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: -539384219, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  - {fileID: 746814181, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
   tile: {fileID: 8682602079062542727, guid: 6d8a69fd942ded34ca297d2e5c1031e2, type: 3}
 --- !u!4 &2078431790
 Transform:
