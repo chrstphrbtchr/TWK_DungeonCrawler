@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class WFC : MonoBehaviour
 {
     const float spawnOffset = 0.5f;
-    const int xLen = 8, yLen = 8;
+    const int xLen = 9, yLen = 9;
 
     int times = xLen * yLen;
     [SerializeField] Sprite[] allSprites;
@@ -113,7 +113,6 @@ public class WFC : MonoBehaviour
                 {
                     if (!tileArray[j,i].collapsed)
                     {
-                        tileArray[j, i].recentlyChanged = false;
                         if (candidates.Count == 0)
                         {
                             candidates.Add(tileArray[j, i]);

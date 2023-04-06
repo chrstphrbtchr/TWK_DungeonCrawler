@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 119087373, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  m_Sprite: {fileID: -1234665024, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,6 +97,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06fb25f9ed5cee44bb2c15810e2f6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collapsed: 0
+  tileNum: 0
   entropy: 0
+  collapsed: 0
   superpositions: 00000100020003000400050006000700080009000a000b000c000d000e000f0010001100120013001400
+  neighbors:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  sprite: {fileID: 0}

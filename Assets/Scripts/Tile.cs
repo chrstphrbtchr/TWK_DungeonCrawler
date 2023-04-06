@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.Pkcs;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    public int tileNum = 0;
     public int entropy;
-    public bool collapsed = false, recentlyChanged = false;
+    public bool collapsed = false;
 
     public List<short> superpositions = new List<short>() { 
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
@@ -32,23 +32,32 @@ public class Tile : MonoBehaviour
             AssignSprite(TilesMaster.allTiles[superpositions[Random.Range(0, superpositions.Count)]].tileIndex);
             CollapseTile();
         }
-        UpdateNeighbors();
     }
 
     void RecalculateSuperpositions(List<short> newOnes)
     {
-        List<short> newList = new List<short>();
+        bool changed = false;
 
-        for(int i = 0; i < newOnes.Count; i++)
+        for(int i = newOnes.Count - 1; i >= 0 ; i--)
         {
-            if (superpositions.Contains(newOnes[i]))
+            if (!superpositions.Contains(newOnes[i]))
             {
-                newList.Add(newOnes[i]);
+                superpositions.Remove(newOnes[i]);
+                changed = true;
             }
         }
-        superpositions.Clear();
-        superpositions = newList;
-        FindEntropy();
+
+        if (changed)
+        {
+            FindEntropy();
+            for (int q = 0; q < neighbors.Length; q++)
+            {
+                if (neighbors[q] != null)
+                {
+                    neighbors[q].UpdateNeighbors((q + 2) % 4);
+                }
+            }
+        }
     }
 
     public void CollapseTile()
@@ -57,31 +66,66 @@ public class Tile : MonoBehaviour
         {
             Debug.Log(this.name + " is Collapsing!");
             collapsed = true;
-            short choice = 0;
+            short choice = -1;
+
+            for(int z = 0; z < neighbors.Length; z++)
+            {
+                if (neighbors[z] != null)
+                {
+                    for (int a = superpositions.Count - 1; a >= 0; a--)
+                    {
+                        bool removed = false;
+                        for (int f = 0; f < neighbors[z].superpositions.Count && !removed; f++)
+                        {
+                            Debug.LogFormat("<color=magenta>Z: {0}, A: {1}, F: {2}, #{3}</color>!", (z + 2) % 4, a, f, TilesMaster.allTiles[neighbors[z].superpositions[f]].tileNumber);
+                            if (!TilesMaster.allTiles[
+                                neighbors[z].superpositions[f]].rules[
+                                (z + 2) % 4].Contains(superpositions[a]))
+                            {
+                                superpositions.Remove(superpositions[a]);
+                                Debug.Log("<color=yellow> REMOVED!!! </color>");
+                                removed = true;
+                                if(superpositions.Count == 0)
+                                {
+                                    Debug.LogError("UH OH, WE GOT AN IMPOSSIBLE TILE HERE!");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             if(superpositions.Count > 0)
             {
+                // CHECK AGAINST NEIGHBORS' POSSIBLE NEIGHBORS.
                 int rnd = Random.Range(0, superpositions.Count);
                 choice = superpositions[rnd];
+                tileNum = choice;
                 superpositions.Clear();
                 superpositions.Add(choice);
             }
+            else
+            {
 
-            AssignSprite(choice);
-            UpdateNeighbors();
+            }
+
+            if(choice > 0)
+            {
+                AssignSprite(choice);
+            }
+            UpdateNeighbors(-1);
         }
     }
 
     void AssignSprite(short s)
     {
         this.name += " - " + s;
-        WFC.ChangeTile(this, s);        // I HATE THIS. BUT, FOR TESTING, I'LL LIVE...
+        WFC.ChangeTile(this, s);        // I HATE THIS. BUT, FOR A GAME JAM, I'LL LIVE...
         print("ASSIGNED " + s + " TILE!");
     }
 
-    void UpdateNeighbors()
+    void UpdateNeighbors(int caller)
     {
-        recentlyChanged = true;
         List<List<short>> candidates = new List<List<short>>(){ new List<short>(),new 
                 List<short>(), new List<short>(), new List<short>()};
 
@@ -93,11 +137,10 @@ public class Tile : MonoBehaviour
             {
                 if (neighbors[x] != null)
                 {
-                    if (!neighbors[x].collapsed && !neighbors[x].recentlyChanged)
+                    if (!neighbors[x].collapsed && x != caller)
                     {
                         for (int b = 0; b < info.rules[x].Count; b++)
                         {
-                            // check north
                             if (!candidates[x].Contains(info.rules[x][b]))
                             {
                                 candidates[x].Add(info.rules[x][b]);
@@ -111,9 +154,9 @@ public class Tile : MonoBehaviour
 
         for(int y = 0; y < 4; y++)
         {
-            if (neighbors[y] != null)
+            if (neighbors[y] != null && y != caller)
             {
-                if (!neighbors[y].collapsed && !neighbors[y].recentlyChanged)
+                if (!neighbors[y].collapsed)
                 {
                     neighbors[y].RecalculateSuperpositions(candidates[y]);
                 }
