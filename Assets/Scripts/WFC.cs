@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class WFC : MonoBehaviour
 {
     const float spawnOffset = 0.5f;
-    const int xLen = 9, yLen = 9;
+    const int xLen = 32, yLen = 20;
 
     int times = xLen * yLen;
     [SerializeField] Sprite[] allSprites;
@@ -17,7 +17,7 @@ public class WFC : MonoBehaviour
 
     void Start()
     {
-        staticAllSprites = allSprites;
+        staticAllSprites = allSprites;  //yuck
         BuildLevel();
         WaveFunctionCollapse();
     }
@@ -105,12 +105,12 @@ public class WFC : MonoBehaviour
 
     Tile ChooseNextTile(bool firstTime)
     {
-        List<Tile> candidates = new List<Tile>();
+        List<Tile> possibilities = new List<Tile>();
         Tile next = null;
 
         if (firstTime)
         {
-            candidates.Add(tileArray[Random.Range(1, xLen - 1), Random.Range(1 , yLen - 1)]);
+            possibilities.Add(tileArray[Random.Range(1, xLen - 1), Random.Range(1 , yLen - 1)]);
         }
         else
         {
@@ -120,19 +120,19 @@ public class WFC : MonoBehaviour
                 {
                     if (!tileArray[j,i].collapsed)
                     {
-                        if (candidates.Count == 0)
+                        if (possibilities.Count == 0)
                         {
-                            candidates.Add(tileArray[j, i]);
+                            possibilities.Add(tileArray[j, i]);
                         }
                         else
                         {
-                            if (candidates[0].GetEntropy() >= tileArray[j, i].GetEntropy())
+                            if (possibilities[0].GetEntropy() >= tileArray[j, i].GetEntropy())
                             {
-                                if (candidates[0].GetEntropy() > tileArray[j, i].GetEntropy())
+                                if (possibilities[0].GetEntropy() > tileArray[j, i].GetEntropy())
                                 {
-                                    candidates.Clear();
+                                    possibilities.Clear();
                                 }
-                                candidates.Add(tileArray[j, i]);
+                                possibilities.Add(tileArray[j, i]);
                             }
                         }
                     }
@@ -140,10 +140,10 @@ public class WFC : MonoBehaviour
             }
         }
 
-        if(candidates.Count > 0)
+        if(possibilities.Count > 0)
         {
-            Debug.Log("<color=purple>CANDIDATES.COUNT: </color>" + candidates.Count);
-            next = candidates[Random.Range(0, candidates.Count)];
+            Debug.Log("<color=purple>CANDIDATES.COUNT: </color>" + possibilities.Count);
+            next = possibilities[Random.Range(0, possibilities.Count)];
         }
         
         return next;
@@ -158,7 +158,6 @@ public class WFC : MonoBehaviour
             if (t == null) return;
 
             t.CollapseTile();
-            Debug.Log("<color=yellow>TEMP: " + temp + "!</color>");
         }
     }
 

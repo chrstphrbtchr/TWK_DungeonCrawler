@@ -33,10 +33,8 @@ public class Tile : MonoBehaviour
     public void FindEntropy()
     {
         entropy = superpositions.Count;
-
         if(entropy == 1)
         {
-            AssignSprite(TilesMaster.allTiles[superpositions[Random.Range(0, superpositions.Count)]].tileIndex);
             CollapseTile();
         }
     }
@@ -47,7 +45,7 @@ public class Tile : MonoBehaviour
 
         for(int i = superpositions.Count; i > 0 ; i--)
         {
-            Debug.LogFormat("<color=yellow>{2} :: SUPERPOS: {0}, NEWONES: {1}</color>", superpositions.Count, newOnes.Count, this.name);
+            
             if (!newOnes.Contains(superpositions[i - 1]))
             {
                 superpositions.RemoveAt(i - 1);
@@ -73,7 +71,7 @@ public class Tile : MonoBehaviour
         if(!collapsed)
         {
             Debug.Log(this.name + " is Collapsing!");
-            Debug.LogWarning("SUPERPOS: " + superpositions.Count);
+            Debug.Log("SUPERPOS: " + superpositions.Count);
             collapsed = true;
             short choice = -1;
 
@@ -84,8 +82,9 @@ public class Tile : MonoBehaviour
                     for (int a = superpositions.Count - 1; a >= 0; a--)
                     {
                         bool possible = false;
-                        for (int f = neighbors[z].superpositions.Count - 1; f >= 0 && !possible; f--)
-                        { 
+
+                        for (int f = 0; f < neighbors[z].superpositions.Count && !possible; f++)
+                        {
                             if (TilesMaster.allTiles[
                                 neighbors[z].superpositions[f]].rules[
                                 (z + 2) % 4].Contains(superpositions[a]))
@@ -97,7 +96,6 @@ public class Tile : MonoBehaviour
                         if (!possible)
                         {
                             superpositions.RemoveAt(a);
-                            Debug.LogWarning("SUPERPOS: " + superpositions.Count);
                         }
                     }
                 }
@@ -106,6 +104,7 @@ public class Tile : MonoBehaviour
             if (superpositions.Count > 0)
             {
                 // CHECK AGAINST NEIGHBORS' POSSIBLE NEIGHBORS.
+                Debug.Log("YAY! SUPERPOSITIONS > 0! :: " + superpositions.Count);
                 int rnd = Random.Range(0, superpositions.Count);
                 choice = superpositions[rnd];
                 tileNum = choice;
@@ -167,7 +166,6 @@ public class Tile : MonoBehaviour
                 if (!neighbors[y].collapsed)
                 {
                     neighbors[y].RecalculateSuperpositions(candidates[y]);
-                    candidates[y].Clear();
                 }
             }
         }
