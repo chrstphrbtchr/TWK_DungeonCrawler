@@ -76,6 +76,7 @@ public class WFC : MonoBehaviour
                 }
 
                 AssignNeighbors(t,x,y);
+
                 for(int i = 0; i<4; i++)
                 {
                     if (t.neighbors[i] == null)
@@ -93,6 +94,9 @@ public class WFC : MonoBehaviour
         {
             t.neighbors[3] = tileArray[x - 1, y];
             tileArray[x - 1, y].neighbors[1] = t;
+
+            t.neighbors[3].candidates[1] = t.superpositions;
+            t.candidates[3] = t.neighbors[3].superpositions;
         }
 
         if(y - 1 >= 0)
@@ -100,6 +104,8 @@ public class WFC : MonoBehaviour
             t.neighbors[0] = tileArray[x, y - 1];
             tileArray[x, y - 1].neighbors[2] = t;
 
+            t.neighbors[0].candidates[2] = t.superpositions;
+            t.candidates[0] = t.neighbors[0].superpositions;
         }
     }
 
