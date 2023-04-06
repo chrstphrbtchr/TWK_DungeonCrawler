@@ -76,6 +76,13 @@ public class WFC : MonoBehaviour
                 }
 
                 AssignNeighbors(t,x,y);
+                for(int i = 0; i<4; i++)
+                {
+                    if (t.neighbors[i] == null)
+                    {
+                        t.candidates[i].Clear();
+                    }
+                }
             }
         }
     }
@@ -103,7 +110,7 @@ public class WFC : MonoBehaviour
 
         if (firstTime)
         {
-            candidates.Add(tileArray[Random.Range(1, xLen - 1), Random.Range(1 ,yLen - 1)]);
+            candidates.Add(tileArray[Random.Range(1, xLen - 1), Random.Range(1 , yLen - 1)]);
         }
         else
         {
