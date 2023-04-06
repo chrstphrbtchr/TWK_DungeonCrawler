@@ -20,20 +20,20 @@ public class WFC : MonoBehaviour
 
     void BuildLevel()
     {
-        for (int i = 0; i < yLen; i++)
+        for (int y = 0; y < yLen; y++)
         {
-            for (int j = 0; j < xLen; j++)
+            for (int x = 0; x < xLen; x++)
             {
-                Tile t = Instantiate(tile, new Vector2(j * spawnOffset, i * spawnOffset),
+                Tile t = Instantiate(tile, new Vector2(x * spawnOffset, y * spawnOffset),
                     Quaternion.identity).GetComponent<Tile>();
-                t.name = "Tile " + j + "-" + i;
-                tileArray[j, i] = t;
+                t.name = "Tile " + x + "-" + y;
+                tileArray[x, y] = t;
 
-                if (i == 0)
+                if (y == yLen - 1)
                 {
-                    if (j == 0 || j == xLen - 1)
+                    if (x == 0 || x == xLen - 1)
                     {
-                        t.superpositions = (j == 0 ? new List<short>() { 0, 2, 10 } :
+                        t.superpositions = (x == 0 ? new List<short>() { 0, 2, 10 } :
                             new List<short>() { 0, 4, 11 });
                     }
                     else
@@ -41,11 +41,11 @@ public class WFC : MonoBehaviour
                         t.superpositions = new List<short> { 0, 2, 3, 4, 10, 11 };
                     }
                 }
-                else if (i == yLen - 1)
+                else if (y == 0)
                 {
-                    if (j == 0 || j == xLen - 1)
+                    if (x == 0 || x == xLen - 1)
                     {
-                        t.superpositions = (j == 0 ? new List<short>() { 0, 6, 12 } :
+                        t.superpositions = (x == 0 ? new List<short>() { 0, 6, 12 } :
                             new List<short>() { 0, 9, 13 });
                     }
                     else
@@ -55,15 +55,15 @@ public class WFC : MonoBehaviour
                 }
                 else
                 {
-                    if (j == 0 || j == xLen - 1)
+                    if (x == 0 || x == xLen - 1)
                     {
-                        t.superpositions = (j == 0 ?
+                        t.superpositions = (x == 0 ?
                             new List<short>() { 0, 2, 5, 7, 10, 12 } :
                             new List<short>() { 0, 4, 6, 9, 11, 13 });
                     }
                 }
 
-                AssignNeighbors(t,j,i);
+                AssignNeighbors(t,x,y);
 
             }
         }
