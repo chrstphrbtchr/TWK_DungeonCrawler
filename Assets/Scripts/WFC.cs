@@ -163,7 +163,7 @@ public class WFC : MonoBehaviour
         {
             Tile t = ChooseNextTile(temp > 0 ? false : true);
 
-            if (t == null) return;
+            if (t == null) { Debug.Log("OOPS!"); return; }
 
             t.CollapseTile();
         }

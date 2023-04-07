@@ -78,6 +78,7 @@ public class Tile : MonoBehaviour
             collapsed = true;
             short choice = -1;
 
+            /*
             for (int z = 0; z < neighbors.Length; z++)
             {
                 if (neighbors[z] != null)
@@ -108,6 +109,7 @@ public class Tile : MonoBehaviour
                     }
                 }
             }
+            */
 
             if (superpositions.Count > 0)
             {
@@ -126,6 +128,8 @@ public class Tile : MonoBehaviour
             if(choice >= 0)
             {
                 AssignSprite(choice);
+                CalculatePossibleNeighbors();
+
             }
             else
             {
@@ -183,22 +187,30 @@ public class Tile : MonoBehaviour
 
     }
 
-    public void CalculatePossibleNeighbors()
+    public void CalculatePossibleNeighbors(short ignoreIndex=-1)
     {
-        for(int i = 0; i < superpositions.Count; i++)
+        for(int n = 0; n < 4; n++)
         {
-            for(int n = 0; n < 4; n++)
+            if (neighbors[n] != null)
             {
-                if (neighbors[n] != null)
+                for (int c = neighborCandidates[n].Count; c > 0; c--)
                 {
-                    for (int c = neighborCandidates[n].Count; c > 0; c--)
+                    bool possible = false;
+
+                    for(int s = 0; s < superpositions.Count && !possible; s++)
                     {
-                        short index = superpositions[i];
+                        short index = superpositions[s];
                         short possibility = neighborCandidates[n][c - 1];
-                        if (!TilesMaster.allTiles[index].rules[n].Contains(possibility))
+
+                        if (TilesMaster.allTiles[index].rules[n].Contains(possibility))
                         {
-                            neighborCandidates[n].RemoveAt(c - 1);
+                            possible = true;
                         }
+                    }
+
+                    if (!possible)
+                    {
+                        neighborCandidates[n].RemoveAt(c - 1);
                     }
                 }
             }
@@ -207,7 +219,7 @@ public class Tile : MonoBehaviour
         FindEntropy();
     }
 
-    void RecalculatePossibilitiesPostCollapse(List<short> newPossibleSPs)
+    void RecalculatePossibilitiesPostCollapse(List<short> newPossibleSPs, short ignoreIndex=-1)
     {
 
     }
