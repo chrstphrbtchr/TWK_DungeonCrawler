@@ -8,10 +8,10 @@ public static class TilesMaster
     {
         // 0: NEGATIVE SPACE!
         new TileInfo(0,
-            new List<short>{0,8,12,13},
-            new List<short>{0,2,5,7,10,12},
-            new List<short>{0,2,3,4,10,11},
-            new List<short>{0,4,6,9,11,13}),
+            new List<short>{0,8,12,13},     // N = 0
+            new List<short>{0,2,5,7,10,12}, // E = 1
+            new List<short>{0,2,3,4,10,11}, // S = 2
+            new List<short>{0,4,6,9,11,13}),// W = 3
         // 1: JUST FLOOR!
         new TileInfo(1,
             new List<short>{1,3,16,17,18,19,20},
@@ -39,7 +39,7 @@ public static class TilesMaster
         // 5: WEST WALL
         new TileInfo(5,
             new List<short>{2,5,10,15},
-            new List<short>{1,14,16,18,19,20},
+            new List<short>{1,6,14,16,18,19,20},
             new List<short>{5,7,12,17},
             new List<short>{0,4,6,9,11,13}),
         // 6: EAST WALL
@@ -47,7 +47,7 @@ public static class TilesMaster
             new List<short>{4,6,11,14},
             new List<short>{0,2,5,7,10,12},
             new List<short>{6,9,13,16},
-            new List<short>{1,15,17,18,19,20}),
+            new List<short>{1,5,15,17,18,19,20}),
         // 7: SW CORNER
         new TileInfo(7,
             new List<short>{2,5,10,15},
@@ -64,7 +64,7 @@ public static class TilesMaster
         new TileInfo(9,
             new List<short>{4,6,11,14},
             new List<short>{0,2,5,7,10,12},
-            new List<short>{2,3,4,10,11},
+            new List<short>{0,2,3,4,10,11},
             new List<short>{7,8,12,14}),
         // 10: SOUTHEAST SLANT
         new TileInfo(10,
@@ -95,11 +95,11 @@ public static class TilesMaster
             new List<short>{1,3,16,17,18,19,20},
             new List<short>{8,9,13,15},
             new List<short>{6,9,13,16},
-            new List<short>{1,5,17,18,19,20}),
+            new List<short>{1,5,15,17,18,19,20}),
         // 15: SOUTHWEST BRICKS
         new TileInfo(15,
             new List<short>{1,3,16,17,18,19,20},
-            new List<short>{1,6,16,18,19,20},
+            new List<short>{1,6,16,14,18,19,20},
             new List<short>{5,7,12,17},
             new List<short>{7,8,12,14}),
         // 16: NORTHEAST BRICKS
@@ -107,11 +107,11 @@ public static class TilesMaster
             new List<short>{4,6,11,14},
             new List<short>{3,4,11,17},
             new List<short>{1,8,14,15,18,19,20},
-            new List<short>{1,4,15,18,19,20}),
+            new List<short>{1,5,15,17,18,19,20}),
         // 17: NORTHWEST BRICKS
         new TileInfo(17,
             new List<short>{2,5,10,15},
-            new List<short>{1,6,16,18,19,20},
+            new List<short>{1,6,14,16,18,19,20},
             new List<short>{1,8,14,15,18,19,20},
             new List<short>{2,3,10,16}),
         // 18: BRICK FLOOR
@@ -165,13 +165,8 @@ public static class TilesMaster
 
 public class TileInfo
 {
-    public short tileNumber;
     public short tileIndex;
     public List<short>[] rules = new List<short>[4];
-    // N : 0
-    // E : 1
-    // S : 2
-    // W : 3
 
     public TileInfo(short index, List<short> north, List<short> east, List<short> south, List<short> west)
     {

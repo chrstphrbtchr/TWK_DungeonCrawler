@@ -81,11 +81,14 @@ public class WFC : MonoBehaviour
                 {
                     if (t.neighbors[i] == null)
                     {
-                        t.candidates[i].Clear();
+                        t.neighborCandidates[i].Clear();
                     }
                 }
+
+                t.CalculatePossibleNeighbors();
             }
         }
+        Debug.Log("Level built.");
     }
 
     void AssignNeighbors(Tile t, int x, int y)
@@ -95,8 +98,8 @@ public class WFC : MonoBehaviour
             t.neighbors[3] = tileArray[x - 1, y];
             tileArray[x - 1, y].neighbors[1] = t;
 
-            t.neighbors[3].candidates[1] = t.superpositions;
-            t.candidates[3] = t.neighbors[3].superpositions;
+            t.neighbors[3].neighborCandidates[1] = t.superpositions;
+            t.neighborCandidates[3] = t.neighbors[3].superpositions;
         }
 
         if(y - 1 >= 0)
@@ -104,8 +107,8 @@ public class WFC : MonoBehaviour
             t.neighbors[0] = tileArray[x, y - 1];
             tileArray[x, y - 1].neighbors[2] = t;
 
-            t.neighbors[0].candidates[2] = t.superpositions;
-            t.candidates[0] = t.neighbors[0].superpositions;
+            t.neighbors[0].neighborCandidates[2] = t.superpositions;
+            t.neighborCandidates[0] = t.neighbors[0].superpositions;
         }
     }
 
@@ -148,7 +151,6 @@ public class WFC : MonoBehaviour
 
         if(possibilities.Count > 0)
         {
-            Debug.Log("<color=purple>CANDIDATES.COUNT: </color>" + possibilities.Count);
             next = possibilities[Random.Range(0, possibilities.Count)];
         }
         
@@ -173,3 +175,16 @@ public class WFC : MonoBehaviour
         t.sprite.sprite = staticAllSprites[num];
     }
 }
+
+// On Collapse, before choosing which Tile, check all neighbors to see if they're logical
+//      save the old superpositions list as a new list.
+//      IF NEW SUPERPOS. LIST == 0, then insert the old list and pick something.
+//          (in the future, if tiles have a %, obviously check this for the most logical)
+//      THEN CALL RECALCULATENEIGHBORS(), which passes in a list of possible
+//          neighbors to the tile you're using as well as it's neighbor index
+//          for the given tile (do for all neighbors THAT DO NOT MAKE SENSE!
+//                  (ie, that do not have this tile in their possible neighbors lists).
+//          THIS SHOULD recalc. the possibilities for the surrounding tiles,
+//          which will then double check if their own neighbors make sense.
+//          (calling on them if they don't, as above...)
+//

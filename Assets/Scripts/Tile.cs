@@ -12,7 +12,7 @@ public class Tile : MonoBehaviour
 
     public List<short> superpositions = new List<short>() { 
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
-    public List<short>[] candidates =
+    public List<short>[] neighborCandidates =
     {
         new List<short>(){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20},
         new List<short>(){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20},
@@ -33,10 +33,12 @@ public class Tile : MonoBehaviour
     public void FindEntropy()
     {
         entropy = superpositions.Count;
-        if(entropy == 1)
+        /*
+        if(entropy <= 1)
         {
             CollapseTile();
         }
+        */
     }
 
     void RecalculateSuperpositions(List<short> newOnes)
@@ -55,12 +57,13 @@ public class Tile : MonoBehaviour
 
         if (changed)
         {
-            FindEntropy();
+            CalculatePossibleNeighbors();
+
             for (int q = 0; q < neighbors.Length; q++)
             {
                 if (neighbors[q] != null)
                 {
-                    neighbors[q].UpdateNeighbors((q + 2) % 4);
+                    neighbors[q].UpdateNeighborsSuperpositions((q + 2) % 4);
                 }
             }
         }
@@ -70,10 +73,10 @@ public class Tile : MonoBehaviour
     {
         if(!collapsed)
         {
-            Debug.Log(this.name + " is Collapsing!");
-            Debug.Log("SUPERPOS: " + superpositions.Count);
+            List<short> oldSuperpositions = new List<short>();
+            oldSuperpositions.Concat(superpositions);
             collapsed = true;
-            short choice = 0;
+            short choice = -1;
 
             for (int z = 0; z < neighbors.Length; z++)
             {
@@ -96,6 +99,11 @@ public class Tile : MonoBehaviour
                         if (!possible)
                         {
                             superpositions.RemoveAt(a);
+
+                            if(superpositions.Count <= 0)
+                            {
+
+                            }
                         }
                     }
                 }
@@ -104,27 +112,26 @@ public class Tile : MonoBehaviour
             if (superpositions.Count > 0)
             {
                 // CHECK AGAINST NEIGHBORS' POSSIBLE NEIGHBORS.
-                Debug.Log("YAY! SUPERPOSITIONS > 0! :: " + superpositions.Count);
                 int rnd = Random.Range(0, superpositions.Count);
                 choice = superpositions[rnd];
                 tileNum = choice;
                 superpositions.Clear();
                 superpositions.Add(choice);
-                for(int i = 0; i < candidates.Length; i++)
+                for(int i = 0; i < neighborCandidates.Length; i++)
                 {
-                    candidates[i] = TilesMaster.allTiles[choice].rules[i];
+                    neighborCandidates[i] = TilesMaster.allTiles[choice].rules[i];
                 }
             }
-            else
-            {
-                Debug.LogErrorFormat("SUPERPOSITIONS FOR {0} ARE {1}!", this.name, superpositions.Count);
-            }
 
-            if(choice > 0)
+            if(choice >= 0)
             {
                 AssignSprite(choice);
             }
-            UpdateNeighbors(-1);
+            else
+            {
+                Debug.LogWarningFormat("{0} has no choices!", this.name);
+            }
+            UpdateNeighborsSuperpositions(-1);
         }
     }
 
@@ -135,7 +142,7 @@ public class Tile : MonoBehaviour
         print("ASSIGNED " + s + " TILE!");
     }
 
-    void UpdateNeighbors(int caller)
+    void UpdateNeighborsSuperpositions(int caller)
     {
         for(int a = 0; a < superpositions.Count; a++)
         {
@@ -149,7 +156,7 @@ public class Tile : MonoBehaviour
                     {
                         for(int y = neighbors[x].superpositions.Count; y > 0; y--)
                         {
-                            if (!candidates[(x + 2) % 4].Contains(neighbors[x].superpositions[y - 1]))
+                            if (!neighborCandidates[(x + 2) % 4].Contains(neighbors[x].superpositions[y - 1]))
                             {
                                 neighbors[x].superpositions.RemoveAt(y - 1);
                             }
@@ -165,9 +172,43 @@ public class Tile : MonoBehaviour
             {
                 if (!neighbors[y].collapsed)
                 {
-                    neighbors[y].RecalculateSuperpositions(candidates[y]);
+                    neighbors[y].RecalculateSuperpositions(neighborCandidates[y]);
                 }
             }
         }
+    }
+
+    void ReEvaluateNeighbors(int myTileIndex)
+    {
+
+    }
+
+    public void CalculatePossibleNeighbors()
+    {
+        for(int i = 0; i < superpositions.Count; i++)
+        {
+            for(int n = 0; n < 4; n++)
+            {
+                if (neighbors[n] != null)
+                {
+                    for (int c = neighborCandidates[n].Count; c > 0; c--)
+                    {
+                        short index = superpositions[i];
+                        short possibility = neighborCandidates[n][c - 1];
+                        if (!TilesMaster.allTiles[index].rules[n].Contains(possibility))
+                        {
+                            neighborCandidates[n].RemoveAt(c - 1);
+                        }
+                    }
+                }
+            }
+        }
+
+        FindEntropy();
+    }
+
+    void RecalculatePossibilitiesPostCollapse(List<short> newPossibleSPs)
+    {
+
     }
 }
