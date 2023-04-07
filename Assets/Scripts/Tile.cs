@@ -73,7 +73,7 @@ public class Tile : MonoBehaviour
             Debug.Log(this.name + " is Collapsing!");
             Debug.Log("SUPERPOS: " + superpositions.Count);
             collapsed = true;
-            short choice = -1;
+            short choice = 0;
 
             for (int z = 0; z < neighbors.Length; z++)
             {
@@ -117,7 +117,7 @@ public class Tile : MonoBehaviour
             }
             else
             {
-                Debug.LogErrorFormat("SUPERPOSITIONS FOR {0} ARE ZERO!", this.name);
+                Debug.LogErrorFormat("SUPERPOSITIONS FOR {0} ARE {1}!", this.name, superpositions.Count);
             }
 
             if(choice > 0)

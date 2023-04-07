@@ -57,7 +57,7 @@ public class WFC : MonoBehaviour
                 {
                     if (x == 0 || x == xLen - 1)
                     {
-                        t.superpositions = (x == 0 ? new List<short>() { 0, 6, 12 } :
+                        t.superpositions = (x == 0 ? new List<short>() { 0, 7, 12 } :
                             new List<short>() { 0, 9, 13 });
                     }
                     else
@@ -165,6 +165,7 @@ public class WFC : MonoBehaviour
 
             t.CollapseTile();
         }
+        Debug.Log("YOU'RE TELLING ME A <color=cyan>WAVE</color> <color=magenta>COLLAPSED</color> THIS <color=lime>FUNCTION</color>?!");
     }
 
     public static void ChangeTile(Tile t, short num)
