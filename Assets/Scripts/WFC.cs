@@ -24,10 +24,12 @@ public class WFC : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene(0);
         }
+#endif
     }
 
     void BuildLevel()
@@ -114,12 +116,11 @@ public class WFC : MonoBehaviour
 
     Tile ChooseNextTile(bool firstTime)
     {
-        List<Tile> possibilities = new List<Tile>();
         Tile next = null;
 
         if (firstTime)
         {
-            possibilities.Add(tileArray[Random.Range(1, xLen - 1), Random.Range(1 , yLen - 1)]);
+            next = tileArray[Random.Range(1, xLen - 1), Random.Range(1 , yLen - 1)];
         }
         else
         {
@@ -129,32 +130,54 @@ public class WFC : MonoBehaviour
                 {
                     if (!tileArray[j,i].collapsed)
                     {
-                        if (possibilities.Count == 0)
+                        if(next == null)
                         {
-                            possibilities.Add(tileArray[j, i]);
+                            next = tileArray[j,i];
                         }
                         else
                         {
-                            if (possibilities[0].GetEntropy() >= tileArray[j, i].GetEntropy())
-                            {
-                                if (possibilities[0].GetEntropy() > tileArray[j, i].GetEntropy())
-                                {
-                                    possibilities.Clear();
-                                }
-                                possibilities.Add(tileArray[j, i]);
-                            }
+                            next = FindLowestEntropyTile(next, tileArray[j,i]);
                         }
                     }
                 }
             }
         }
-
-        if(possibilities.Count > 0)
-        {
-            next = possibilities[Random.Range(0, possibilities.Count)];
-        }
         
         return next;
+    }
+
+    Tile FindLowestEntropyTile(Tile current, Tile challenger)
+    {
+        if(current.entropy < challenger.entropy)
+        {
+            return current;
+        }
+        else if(current.entropy > challenger.entropy)
+        {
+            return challenger;
+        }
+        else
+        {
+            int rnd = Random.Range(0, 2);
+            return (rnd == 0 ? current : challenger);
+        }
+    }
+
+    TileInfo GetHighestPercentageTileInfo(TileInfo current, TileInfo challenger)
+    {
+        if(current.percentage < challenger.percentage)
+        {
+            return challenger;
+        }
+        else if(current.percentage > challenger.percentage)
+        {
+            return current;
+        }
+        else
+        {
+            int rnd = Random.Range(0, 2);
+            return (rnd == 0 ? current : challenger);
+        }
     }
 
     void WaveFunctionCollapse()
@@ -188,3 +211,5 @@ public class WFC : MonoBehaviour
 //          which will then double check if their own neighbors make sense.
 //          (calling on them if they don't, as above...)
 //
+
+

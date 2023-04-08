@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.tvOS;
 
@@ -41,6 +42,7 @@ public class Tile : MonoBehaviour
         */
     }
 
+    /*
     void RecalculateSuperpositions(List<short> newOnes)
     {
         bool changed = false;
@@ -68,57 +70,26 @@ public class Tile : MonoBehaviour
             }
         }
     }
+    */
 
     public void CollapseTile()
     {
         if(!collapsed)
         {
+            collapsed = true;
+
             List<short> oldSuperpositions = new List<short>();
             oldSuperpositions.Concat(superpositions);
-            collapsed = true;
             short choice = -1;
-
-            /*
-            for (int z = 0; z < neighbors.Length; z++)
-            {
-                if (neighbors[z] != null)
-                {
-                    for (int a = superpositions.Count - 1; a >= 0; a--)
-                    {
-                        bool possible = false;
-
-                        for (int f = 0; f < neighbors[z].superpositions.Count && !possible; f++)
-                        {
-                            if (TilesMaster.allTiles[
-                                neighbors[z].superpositions[f]].rules[
-                                (z + 2) % 4].Contains(superpositions[a]))
-                            {
-                                possible = true;
-                            }
-                        }
-
-                        if (!possible)
-                        {
-                            superpositions.RemoveAt(a);
-
-                            if(superpositions.Count <= 0)
-                            {
-
-                            }
-                        }
-                    }
-                }
-            }
-            */
 
             if (superpositions.Count > 0)
             {
-                // CHECK AGAINST NEIGHBORS' POSSIBLE NEIGHBORS.
                 int rnd = Random.Range(0, superpositions.Count);
                 choice = superpositions[rnd];
                 tileNum = choice;
                 superpositions.Clear();
                 superpositions.Add(choice);
+
                 for(int i = 0; i < neighborCandidates.Length; i++)
                 {
                     neighborCandidates[i] = TilesMaster.allTiles[choice].rules[i];
@@ -128,14 +99,13 @@ public class Tile : MonoBehaviour
             if(choice >= 0)
             {
                 AssignSprite(choice);
-                CalculatePossibleNeighbors();
-
+                UpdateNeighborsSuperpositions(true, null, -1);
             }
             else
             {
                 Debug.LogWarningFormat("{0} has no choices!", this.name);
             }
-            UpdateNeighborsSuperpositions(-1);
+            
         }
     }
 
@@ -146,45 +116,50 @@ public class Tile : MonoBehaviour
         print("ASSIGNED " + s + " TILE!");
     }
 
-    void UpdateNeighborsSuperpositions(int caller)
+    void UpdateNeighborsSuperpositions(bool onCollapse, List<short> newSuperpositions, short neighborIndexOfCaller)
     {
-        for(int a = 0; a < superpositions.Count; a++)
+        if (!onCollapse)
         {
-            TileInfo info = TilesMaster.allTiles[superpositions[a]];
+            List<short> oldSuperpositions = new List<short>();
+            oldSuperpositions.Concat(this.superpositions);
 
-            for(int x = 0; x < 4; x++)
+            for(int i = superpositions.Count - 1; i >= 0; i--)
             {
-                if (neighbors[x] != null)
+                if (!newSuperpositions.Contains(superpositions[i]))
                 {
-                    if (!neighbors[x].collapsed && x != caller)
-                    {
-                        for(int y = neighbors[x].superpositions.Count; y > 0; y--)
-                        {
-                            if (!neighborCandidates[(x + 2) % 4].Contains(neighbors[x].superpositions[y - 1]))
-                            {
-                                neighbors[x].superpositions.RemoveAt(y - 1);
-                            }
-                        }
-                    }
+                    superpositions.RemoveAt(i);
                 }
+            }
+
+            if (superpositions.Count != oldSuperpositions.Count)
+            {
+                // There has been a change, so update our neighboring superpositions and call this method on our neighbors EXCEPT nIofC
+                if (superpositions.Count == 0)
+                {
+                    collapsed = false;
+                    superpositions.Concat(oldSuperpositions);
+                }
+            }
+            else
+            {
+                CalculatePossibleNeighbors(neighborIndexOfCaller);
+                return;
             }
         }
 
-        for(int y = 0; y < 4; y++)
+        CalculatePossibleNeighbors(neighborIndexOfCaller);
+
+        for (int j = 0; j < 4; j++)
         {
-            if (neighbors[y] != null && y != caller)
+            if (j != neighborIndexOfCaller)
             {
-                if (!neighbors[y].collapsed)
+                if (neighbors[j] != null)
                 {
-                    neighbors[y].RecalculateSuperpositions(neighborCandidates[y]);
+                    short s = (short)((j + 2) % 4);
+                    UpdateNeighborsSuperpositions(false, neighborCandidates[j], s);
                 }
             }
         }
-    }
-
-    void ReEvaluateNeighbors(int myTileIndex)
-    {
-
     }
 
     public void CalculatePossibleNeighbors(short ignoreIndex=-1)
@@ -193,34 +168,32 @@ public class Tile : MonoBehaviour
         {
             if (neighbors[n] != null)
             {
-                for (int c = neighborCandidates[n].Count; c > 0; c--)
+                if(n != ignoreIndex)
                 {
-                    bool possible = false;
-
-                    for(int s = 0; s < superpositions.Count && !possible; s++)
+                    for (int c = neighborCandidates[n].Count; c > 0; c--)
                     {
-                        short index = superpositions[s];
-                        short possibility = neighborCandidates[n][c - 1];
+                        bool possible = false;
 
-                        if (TilesMaster.allTiles[index].rules[n].Contains(possibility))
+                        for (int s = 0; s < superpositions.Count && !possible; s++)
                         {
-                            possible = true;
-                        }
-                    }
+                            short index = superpositions[s];
+                            short possibility = neighborCandidates[n][c - 1];
 
-                    if (!possible)
-                    {
-                        neighborCandidates[n].RemoveAt(c - 1);
+                            if (TilesMaster.allTiles[index].rules[n].Contains(possibility))
+                            {
+                                possible = true;
+                            }
+                        }
+
+                        if (!possible)
+                        {
+                            neighborCandidates[n].RemoveAt(c - 1);
+                        }
                     }
                 }
             }
         }
 
         FindEntropy();
-    }
-
-    void RecalculatePossibilitiesPostCollapse(List<short> newPossibleSPs, short ignoreIndex=-1)
-    {
-
     }
 }
