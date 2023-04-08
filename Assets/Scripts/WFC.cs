@@ -163,26 +163,10 @@ public class WFC : MonoBehaviour
         }
     }
 
-    TileInfo GetHighestPercentageTileInfo(TileInfo current, TileInfo challenger)
-    {
-        if(current.percentage < challenger.percentage)
-        {
-            return challenger;
-        }
-        else if(current.percentage > challenger.percentage)
-        {
-            return current;
-        }
-        else
-        {
-            int rnd = Random.Range(0, 2);
-            return (rnd == 0 ? current : challenger);
-        }
-    }
 
     void WaveFunctionCollapse()
     {
-        for(int temp = 0; temp < times; temp++)
+        for(int temp = 0; temp < times * 3 || TilesMaster.collapsedTiles >= xLen * yLen; temp++)
         {
             Tile t = ChooseNextTile(temp > 0 ? false : true);
 

@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.tvOS;
 
 public class Tile : MonoBehaviour
 {
-    public int tileNum = 0;
+    public short tileNum = 0;
     public int entropy;
     public bool collapsed = false;
 
@@ -77,6 +75,7 @@ public class Tile : MonoBehaviour
         if(!collapsed)
         {
             collapsed = true;
+            TilesMaster.collapsedTiles++;
 
             List<short> oldSuperpositions = new List<short>();
             oldSuperpositions.Concat(superpositions);
@@ -84,9 +83,17 @@ public class Tile : MonoBehaviour
 
             if (superpositions.Count > 0)
             {
+                /*
                 int rnd = Random.Range(0, superpositions.Count);
                 choice = superpositions[rnd];
-                tileNum = choice;
+                */
+                TileInfo tInfo = TilesMaster.allTiles[superpositions[0]];
+                for(int i = 1; i < superpositions.Count; i++)
+                {
+                    tInfo = GetHighestPercentageTileInfo(tInfo, TilesMaster.allTiles[superpositions[i]]);
+                }
+                tileNum = tInfo.tileIndex;
+                choice = (short)tileNum;
                 superpositions.Clear();
                 superpositions.Add(choice);
 
@@ -100,10 +107,12 @@ public class Tile : MonoBehaviour
             {
                 AssignSprite(choice);
                 UpdateNeighborsSuperpositions(true, null, -1);
+                TilesMaster.EvaluatePercentages(tileNum);
             }
             else
             {
                 Debug.LogWarningFormat("{0} has no choices!", this.name);
+                UpdateNeighborsSuperpositions(false, oldSuperpositions, -1);
             }
             
         }
@@ -120,8 +129,7 @@ public class Tile : MonoBehaviour
     {
         if (!onCollapse)
         {
-            List<short> oldSuperpositions = new List<short>();
-            oldSuperpositions.Concat(this.superpositions);
+            int oldSuperpositionsCount = superpositions.Count;
 
             for(int i = superpositions.Count - 1; i >= 0; i--)
             {
@@ -131,13 +139,19 @@ public class Tile : MonoBehaviour
                 }
             }
 
-            if (superpositions.Count != oldSuperpositions.Count)
+            if (superpositions.Count != oldSuperpositionsCount)
             {
                 // There has been a change, so update our neighboring superpositions and call this method on our neighbors EXCEPT nIofC
                 if (superpositions.Count == 0)
                 {
-                    collapsed = false;
-                    superpositions.Concat(oldSuperpositions);
+                    if (collapsed)
+                    {
+                        collapsed = false;
+                        TilesMaster.collapsedTiles--;
+                        TilesMaster.EvaluatePercentages(tileNum, true);
+                    }
+                    
+                    superpositions.Concat(newSuperpositions);
                 }
             }
             else
@@ -195,5 +209,22 @@ public class Tile : MonoBehaviour
         }
 
         FindEntropy();
+    }
+
+    TileInfo GetHighestPercentageTileInfo(TileInfo current, TileInfo challenger)
+    {
+        if (current.percentage < challenger.percentage)
+        {
+            return challenger;
+        }
+        else if (current.percentage > challenger.percentage)
+        {
+            return current;
+        }
+        else
+        {
+            int rnd = Random.Range(0, 2);
+            return (rnd == 0 ? current : challenger);
+        }
     }
 }
