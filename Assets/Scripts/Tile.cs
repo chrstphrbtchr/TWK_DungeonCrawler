@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -113,6 +112,7 @@ public class Tile : MonoBehaviour
             {
                 Debug.LogWarningFormat("{0} has no choices!", this.name);
                 UpdateNeighborsSuperpositions(false, oldSuperpositions, -1);
+                collapsed = false;
             }
             
         }
@@ -226,5 +226,10 @@ public class Tile : MonoBehaviour
             int rnd = Random.Range(0, 2);
             return (rnd == 0 ? current : challenger);
         }
+    }
+
+    void DoubleCheckSuperpositions()
+    {
+
     }
 }

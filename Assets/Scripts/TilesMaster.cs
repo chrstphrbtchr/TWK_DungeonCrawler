@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
 
 public static class TilesMaster
 {
@@ -10,14 +7,14 @@ public static class TilesMaster
     public static TileInfo[] allTiles =
     {
         // 0: NEGATIVE SPACE!
-        new TileInfo(0, 40,
+        new TileInfo(0, 10,
             new short[] {-1,2,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1},
             new List<short>{0,8,12,13},     // N = 0
             new List<short>{0,2,5,7,10,12}, // E = 1
             new List<short>{0,2,3,4,10,11}, // S = 2
             new List<short>{0,4,6,9,11,13}),// W = 3
         // 1: JUST FLOOR!
-        new TileInfo(1,45,
+        new TileInfo(1,30,
             new short[] {-1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1},
             new List<short>{1,3,16,17,18,19,20},
             new List<short>{1,6,14,16,18,19,20},
@@ -157,33 +154,6 @@ public static class TilesMaster
             new List<short>{1,8,14,15,18,19},
             new List<short>{1,5,15,17,18,19})
     };
-
-    /// <summary>
-    /// Given two Tiles, returns 0 if the entropy of both 
-    /// Tiles is equal, -1 if the new Tile is less, and 1 
-    /// if the currently selected Tile still has the 
-    /// least entropy.
-    /// </summary>
-    /// <param name="current">Currently the Tile with the lowest entropy.</param>
-    /// <param name="other">A new challenger!</param>
-    /// <returns>-1, 0, or 1 depending on whether the new Tile 
-    /// has less, equal, or greater entropy than the current.</returns>
-    public static int CompareEntropy(Tile current, Tile other)
-    {
-        if (current == null)
-        {
-            return -1;
-        }
-
-        if(other.entropy <= current.entropy)
-        {
-            return (current.entropy == other.entropy) ? 0 : -1;
-        }
-        else
-        {
-            return 1;
-        }
-    }
 
     public static void EvaluatePercentages(short num, bool reverse=false)
     {
