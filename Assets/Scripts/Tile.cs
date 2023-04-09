@@ -28,46 +28,7 @@ public class Tile : MonoBehaviour
     }
 
     public int GetEntropy() => entropy;
-    public void FindEntropy()
-    {
-        entropy = superpositions.Count;
-        /*
-        if(entropy <= 1)
-        {
-            CollapseTile();
-        }
-        */
-    }
-
-    /*
-    void RecalculateSuperpositions(List<short> newOnes)
-    {
-        bool changed = false;
-
-        for(int i = superpositions.Count; i > 0 ; i--)
-        {
-            
-            if (!newOnes.Contains(superpositions[i - 1]))
-            {
-                superpositions.RemoveAt(i - 1);
-                changed = true;
-            }
-        }
-
-        if (changed)
-        {
-            CalculatePossibleNeighbors();
-
-            for (int q = 0; q < neighbors.Length; q++)
-            {
-                if (neighbors[q] != null)
-                {
-                    neighbors[q].UpdateNeighborsSuperpositions((q + 2) % 4);
-                }
-            }
-        }
-    }
-    */
+    public void FindEntropy() => entropy = superpositions.Count;
 
     public void CollapseTile()
     {
@@ -75,10 +36,18 @@ public class Tile : MonoBehaviour
         {
             collapsed = true;
             TilesMaster.collapsedTiles++;
-
             List<short> oldSuperpositions = new List<short>();
             oldSuperpositions.Concat(superpositions);
+
             short choice = -1;
+
+            for (int a = superpositions.Count - 1; a >= 0; a--)
+            {
+                if (!DoubleCheckSuperposition(superpositions[a]))
+                {
+                    superpositions.RemoveAt(a);
+                }
+            }
 
             if (superpositions.Count > 0)
             {
@@ -86,6 +55,7 @@ public class Tile : MonoBehaviour
                 int rnd = Random.Range(0, superpositions.Count);
                 choice = superpositions[rnd];
                 */
+
                 TileInfo tInfo = TilesMaster.allTiles[superpositions[0]];
                 for(int i = 1; i < superpositions.Count; i++)
                 {
@@ -98,7 +68,17 @@ public class Tile : MonoBehaviour
 
                 for(int i = 0; i < possibleNeighboringSuperpositions.Length; i++)
                 {
-                    possibleNeighboringSuperpositions[i] = TilesMaster.allTiles[choice].sockets[i];
+                    possibleNeighboringSuperpositions[i].Clear();
+                    TileInfo thisTilesInfo = TilesMaster.allTiles[tileNum];
+
+                    for(int g = 0; g < TilesMaster.allTiles.Length; g++)
+                    {
+                        TileInfo thatTilesInfo = TilesMaster.allTiles[g];
+                        if(WFC.IsNeighborValid(thisTilesInfo.sockets, thatTilesInfo.sockets, i))
+                        {
+                            possibleNeighboringSuperpositions[i].Add((short)g);
+                        }
+                    }
                 }
             }
 
@@ -110,9 +90,18 @@ public class Tile : MonoBehaviour
             }
             else
             {
-                Debug.LogWarningFormat("{0} has no choices!", this.name);
-                UpdateNeighborsSuperpositions(false, oldSuperpositions, -1);
+                Debug.LogWarningFormat("{0} has no choices! {1}", this.name, oldSuperpositions.Count);
                 collapsed = false;
+                if (oldSuperpositions.Count == 0)
+                {
+                    UpdateNeighborsSuperpositions(false, new List<short> {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20}, -1);
+                }
+                else
+                {
+                    UpdateNeighborsSuperpositions(false, oldSuperpositions, -1);
+                }
+                
+                
             }
             
         }
@@ -190,10 +179,10 @@ public class Tile : MonoBehaviour
 
                         for (int s = 0; s < superpositions.Count && !possible; s++)
                         {
-                            short index = superpositions[s];
-                            short possibility = possibleNeighboringSuperpositions[n][c - 1];
+                            TileInfo current = TilesMaster.allTiles[superpositions[s]];
+                            TileInfo neighbor = TilesMaster.allTiles[possibleNeighboringSuperpositions[n][c - 1]];
 
-                            if (TilesMaster.allTiles[index].sockets[n].Contains(possibility))
+                            if (WFC.IsNeighborValid(current.sockets, neighbor.sockets, n))
                             {
                                 possible = true;
                             }
@@ -201,6 +190,7 @@ public class Tile : MonoBehaviour
 
                         if (!possible)
                         {
+                            Debug.LogFormat("REMOVED! {0} INDEX {1}: {2}. IgnoreIndex = {3}.", this.name,(c - 1), possibleNeighboringSuperpositions[n][c-1], ignoreIndex);
                             possibleNeighboringSuperpositions[n].RemoveAt(c - 1);
                         }
                     }
@@ -228,8 +218,24 @@ public class Tile : MonoBehaviour
         }
     }
 
-    void DoubleCheckSuperpositions()
+    bool DoubleCheckSuperposition(short index)
     {
+        TileInfo t = TilesMaster.allTiles[index];
+        for (int i = 0; i < neighbors.Length; i++)
+        {
+            if (neighbors[i] != null)
+            {
+                if (neighbors[i].collapsed)
+                {
+                    TileInfo n = TilesMaster.allTiles[neighbors[i].tileNum];
 
+                    if (!WFC.IsNeighborValid(t.sockets, n.sockets, i))
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

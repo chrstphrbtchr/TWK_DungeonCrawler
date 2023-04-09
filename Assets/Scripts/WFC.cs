@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using System.Windows.Forms.VisualStyles;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class WFC : MonoBehaviour
 {
     const float spawnOffset = 0.5f;
-    const int xLen = 32, yLen = 20;
+    const int xLen = 10, yLen = 10;
 
     int times = xLen * yLen;
     [SerializeField] Sprite[] allSprites;
@@ -168,7 +167,7 @@ public class WFC : MonoBehaviour
         t.sprite.sprite = staticAllSprites[num];
     }
 
-    public bool IsNeighborValid(bool[] current, bool[] neighbor, short index)
+    public static bool IsNeighborValid(bool[] current, bool[] neighbor, int index)
     {
         return (current[index] == neighbor[(index + 2) % 4] && current[(index + 1) % 4] == neighbor[(index + 3) % 4]);
     }
