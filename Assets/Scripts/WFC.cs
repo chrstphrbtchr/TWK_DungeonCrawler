@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Windows.Forms.VisualStyles;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -82,7 +83,7 @@ public class WFC : MonoBehaviour
                 {
                     if (t.neighbors[i] == null)
                     {
-                        t.neighborCandidates[i].Clear();
+                        t.possibleNeighboringSuperpositions[i].Clear();
                     }
                 }
 
@@ -99,8 +100,8 @@ public class WFC : MonoBehaviour
             t.neighbors[3] = tileArray[x - 1, y];
             tileArray[x - 1, y].neighbors[1] = t;
 
-            t.neighbors[3].neighborCandidates[1] = t.superpositions;
-            t.neighborCandidates[3] = t.neighbors[3].superpositions;
+            t.neighbors[3].possibleNeighboringSuperpositions[1] = t.superpositions;
+            t.possibleNeighboringSuperpositions[3] = t.neighbors[3].superpositions;
         }
 
         if(y - 1 >= 0)
@@ -108,8 +109,8 @@ public class WFC : MonoBehaviour
             t.neighbors[0] = tileArray[x, y - 1];
             tileArray[x, y - 1].neighbors[2] = t;
 
-            t.neighbors[0].neighborCandidates[2] = t.superpositions;
-            t.neighborCandidates[0] = t.neighbors[0].superpositions;
+            t.neighbors[0].possibleNeighboringSuperpositions[2] = t.superpositions;
+            t.possibleNeighboringSuperpositions[0] = t.neighbors[0].superpositions;
         }
     }
 
@@ -165,6 +166,11 @@ public class WFC : MonoBehaviour
     public static void ChangeTile(Tile t, short num)
     {
         t.sprite.sprite = staticAllSprites[num];
+    }
+
+    public bool IsNeighborValid(bool[] current, bool[] neighbor, short index)
+    {
+        return (current[index] == neighbor[(index + 2) % 4] && current[(index + 1) % 4] == neighbor[(index + 3) % 4]);
     }
 
     void WaveFunctionCollapse()

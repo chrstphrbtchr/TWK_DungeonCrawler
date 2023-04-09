@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
 
     public List<short> superpositions = new List<short>() { 
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
-    public List<short>[] neighborCandidates =
+    public List<short>[] possibleNeighboringSuperpositions =
     {
         new List<short>(){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20},
         new List<short>(){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20},
@@ -96,9 +96,9 @@ public class Tile : MonoBehaviour
                 superpositions.Clear();
                 superpositions.Add(choice);
 
-                for(int i = 0; i < neighborCandidates.Length; i++)
+                for(int i = 0; i < possibleNeighboringSuperpositions.Length; i++)
                 {
-                    neighborCandidates[i] = TilesMaster.allTiles[choice].rules[i];
+                    possibleNeighboringSuperpositions[i] = TilesMaster.allTiles[choice].sockets[i];
                 }
             }
 
@@ -170,7 +170,7 @@ public class Tile : MonoBehaviour
                 if (neighbors[j] != null)
                 {
                     short s = (short)((j + 2) % 4);
-                    UpdateNeighborsSuperpositions(false, neighborCandidates[j], s);
+                    UpdateNeighborsSuperpositions(false, possibleNeighboringSuperpositions[j], s);
                 }
             }
         }
@@ -184,16 +184,16 @@ public class Tile : MonoBehaviour
             {
                 if(n != ignoreIndex)
                 {
-                    for (int c = neighborCandidates[n].Count; c > 0; c--)
+                    for (int c = possibleNeighboringSuperpositions[n].Count; c > 0; c--)
                     {
                         bool possible = false;
 
                         for (int s = 0; s < superpositions.Count && !possible; s++)
                         {
                             short index = superpositions[s];
-                            short possibility = neighborCandidates[n][c - 1];
+                            short possibility = possibleNeighboringSuperpositions[n][c - 1];
 
-                            if (TilesMaster.allTiles[index].rules[n].Contains(possibility))
+                            if (TilesMaster.allTiles[index].sockets[n].Contains(possibility))
                             {
                                 possible = true;
                             }
@@ -201,7 +201,7 @@ public class Tile : MonoBehaviour
 
                         if (!possible)
                         {
-                            neighborCandidates[n].RemoveAt(c - 1);
+                            possibleNeighboringSuperpositions[n].RemoveAt(c - 1);
                         }
                     }
                 }
