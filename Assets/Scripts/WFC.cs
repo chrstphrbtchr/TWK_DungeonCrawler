@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,10 +23,12 @@ public class WFC : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene(0);
         }
+#endif
     }
 
     void BuildLevel()
@@ -114,12 +115,11 @@ public class WFC : MonoBehaviour
 
     Tile ChooseNextTile(bool firstTime)
     {
-        List<Tile> possibilities = new List<Tile>();
         Tile next = null;
 
         if (firstTime)
         {
-            possibilities.Add(tileArray[Random.Range(1, xLen - 1), Random.Range(1 , yLen - 1)]);
+            next = tileArray[Random.Range(0, xLen), Random.Range(0 , yLen)];
         }
         else
         {
@@ -129,50 +129,74 @@ public class WFC : MonoBehaviour
                 {
                     if (!tileArray[j,i].collapsed)
                     {
-                        if (possibilities.Count == 0)
+                        if(next == null)
                         {
-                            possibilities.Add(tileArray[j, i]);
+                            next = tileArray[j,i];
                         }
                         else
                         {
-                            if (possibilities[0].GetEntropy() >= tileArray[j, i].GetEntropy())
-                            {
-                                if (possibilities[0].GetEntropy() > tileArray[j, i].GetEntropy())
-                                {
-                                    possibilities.Clear();
-                                }
-                                possibilities.Add(tileArray[j, i]);
-                            }
+                            next = FindLowestEntropyTile(next, tileArray[j,i]);
                         }
                     }
                 }
             }
         }
-
-        if(possibilities.Count > 0)
-        {
-            next = possibilities[Random.Range(0, possibilities.Count)];
-        }
         
         return next;
     }
 
-    void WaveFunctionCollapse()
+    Tile FindLowestEntropyTile(Tile current, Tile challenger)
     {
-        for(int temp = 0; temp < times; temp++)
+        if(current.entropy < challenger.entropy)
         {
-            Tile t = ChooseNextTile(temp > 0 ? false : true);
-
-            if (t == null) { Debug.Log("OOPS!"); return; }
-
-            t.CollapseTile();
+            return current;
         }
-        Debug.Log("YOU'RE TELLING ME A <color=cyan>WAVE</color> <color=magenta>COLLAPSED</color> THIS <color=lime>FUNCTION</color>?!");
+        else if(current.entropy > challenger.entropy)
+        {
+            return challenger;
+        }
+        else
+        {
+            int rnd = Random.Range(0, 2);
+            return (rnd == 0 ? current : challenger);
+        }
     }
 
     public static void ChangeTile(Tile t, short num)
     {
         t.sprite.sprite = staticAllSprites[num];
+    }
+
+    void WaveFunctionCollapse()
+    {
+        for (int temp = 0; temp < times * 10 && TilesMaster.collapsedTiles < xLen * yLen; temp++)
+        {
+            Tile t = ChooseNextTile(temp > 0 ? false : true);
+
+            if (t == null) return; 
+
+            t.CollapseTile();
+        }
+
+        Fun();
+    }
+
+    void Fun()
+    {
+        List<string> strings1 = new List<string>() { "WAVE", "FUNCTION", "COLLAPSE" };
+        string[] strings2 = new string[3];
+        for (int i = 0; i < strings2.Length; i++)
+        {
+            int r = Random.Range(0, strings1.Count);
+            strings2[i] = strings1[r];
+            strings1.RemoveAt(r);
+        }
+        if (strings2[1].CompareTo("FUNCTION") == 0)
+        {
+            strings2[1] += "E";
+        }
+        Debug.LogFormat("YOU'RE TELLING ME A <color=cyan>{0}</color> " +
+            "<color=magenta>{1}D</color> THIS <color=lime>{2}</color>?!", strings2[0], strings2[1], strings2[2]);
     }
 }
 
@@ -188,3 +212,5 @@ public class WFC : MonoBehaviour
 //          which will then double check if their own neighbors make sense.
 //          (calling on them if they don't, as above...)
 //
+
+
