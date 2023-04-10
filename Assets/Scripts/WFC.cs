@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 public class WFC : MonoBehaviour
 {
     const float spawnOffset = 0.5f;
-    const int xLen = 10, yLen = 10;
+    public static short xLen = 32, yLen = 20;
 
     int times = xLen * yLen;
+    int maxIterations = 3;
     [SerializeField] Sprite[] allSprites;
     static Sprite[] staticAllSprites; // THIS SUCKS.
     
@@ -42,39 +43,7 @@ public class WFC : MonoBehaviour
                 t.name = "Tile [" + x + ", " + y + "]";
                 tileArray[x, y] = t;
 
-                if (y == yLen - 1)
-                {
-                    if (x == 0 || x == xLen - 1)
-                    {
-                        t.superpositions = (x == 0 ? new List<short>() { 0, 2, 10 } :
-                            new List<short>() { 0, 4, 11 });
-                    }
-                    else
-                    {
-                        t.superpositions = new List<short> { 0, 2, 3, 4, 10, 11 };
-                    }
-                }
-                else if (y == 0)
-                {
-                    if (x == 0 || x == xLen - 1)
-                    {
-                        t.superpositions = (x == 0 ? new List<short>() { 0, 7, 12 } :
-                            new List<short>() { 0, 9, 13 });
-                    }
-                    else
-                    {
-                        t.superpositions = new List<short> { 0, 7, 8, 9, 12, 13 };
-                    }
-                }
-                else
-                {
-                    if (x == 0 || x == xLen - 1)
-                    {
-                        t.superpositions = (x == 0 ?
-                            new List<short>() { 0, 2, 5, 7, 10, 12 } :
-                            new List<short>() { 0, 4, 6, 9, 11, 13 });
-                    }
-                }
+                t.AssignStartingSuperpositions(x, y);
 
                 AssignNeighbors(t,x,y);
 
@@ -82,7 +51,7 @@ public class WFC : MonoBehaviour
                 {
                     if (t.neighbors[i] == null)
                     {
-                        t.possibleNeighboringSuperpositions[i].Clear();
+                        t.possibleNeighboringSuperpositions[i] = new List<short> { 0 };
                     }
                 }
 
@@ -105,12 +74,14 @@ public class WFC : MonoBehaviour
 
         if(y - 1 >= 0)
         {
-            t.neighbors[0] = tileArray[x, y - 1];
-            tileArray[x, y - 1].neighbors[2] = t;
+            t.neighbors[2] = tileArray[x, y - 1];
+            tileArray[x, y - 1].neighbors[0] = t;
 
-            t.neighbors[0].possibleNeighboringSuperpositions[2] = t.superpositions;
-            t.possibleNeighboringSuperpositions[0] = t.neighbors[0].superpositions;
+            t.neighbors[2].possibleNeighboringSuperpositions[0] = t.superpositions;
+            t.possibleNeighboringSuperpositions[2] = t.neighbors[2].superpositions;
         }
+
+        
     }
 
     Tile ChooseNextTile(bool firstTime)
@@ -169,12 +140,13 @@ public class WFC : MonoBehaviour
 
     public static bool IsNeighborValid(bool[] current, bool[] neighbor, int index)
     {
-        return (current[index] == neighbor[(index + 2) % 4] && current[(index + 1) % 4] == neighbor[(index + 3) % 4]);
+        return (current[index] == neighbor[(index + 3) % 4] && current[(index + 1) % 4] == neighbor[(index + 2) % 4]);
     }
 
     void WaveFunctionCollapse()
     {
-        for (int temp = 0; temp < times * 10 && TilesMaster.collapsedTiles < xLen * yLen; temp++)
+        TilesMaster.collapsedTiles = 0;
+        for (int temp = 0; temp < times * maxIterations && TilesMaster.collapsedTiles < xLen * yLen; temp++)
         {
             Tile t = ChooseNextTile(temp > 0 ? false : true);
 
