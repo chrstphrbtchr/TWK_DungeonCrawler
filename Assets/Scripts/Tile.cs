@@ -64,6 +64,7 @@ public class Tile : MonoBehaviour
                 }
                 tileNum = tInfo.tileIndex;
                 choice = (short)tileNum;
+                /*
                 superpositions.Clear();
                 superpositions.Add(choice);
 
@@ -82,6 +83,7 @@ public class Tile : MonoBehaviour
                         }
                     }
                 }
+                */
             }
 
             if(choice >= 0)
@@ -95,6 +97,7 @@ public class Tile : MonoBehaviour
             {
                 Debug.LogWarningFormat("{0} has no choices! {1}", this.name, oldSuperpositions.Count);
                 collapsed = false;
+                TilesMaster.collapsedTiles--;
 
                 if (oldSuperpositions.Count == 0)
                 {
@@ -249,6 +252,7 @@ public class Tile : MonoBehaviour
                         Debug.LogWarningFormat("{0} is <color=magenta>not valid</color> for {1}!", this.name, neighbors[i].name);
                         this.collapsed = false;
                         neighbors[i].collapsed = false;
+                        TilesMaster.collapsedTiles -= 2;
                         return false;
                     }
                 }

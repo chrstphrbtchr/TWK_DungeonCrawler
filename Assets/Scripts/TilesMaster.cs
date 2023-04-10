@@ -47,35 +47,35 @@ public static class TilesMaster
             new short[] {0,2,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,1,1,1,1,2,2,2},
             new bool[] {false, true, true, true}),
         // 10: SOUTHEAST SLANT
-        new TileInfo(10,0,
+        new TileInfo(10,100,
             new short[] {1,1,1,1,1,0,0,0,0,0,-1,0,-1,-1,0,1,0,2,1,1,1},
             new bool[] {true, true, false, true}),
         // 11: SOUTHWEST SLANT
-        new TileInfo(11,0,
+        new TileInfo(11,100,
             new short[] {1,1,1,1,1,0,0,0,0,0,0,-1,-1,-1,0,0,2,1,1,1,1},
             new bool[] {true, true, true, false}),
         // 12: NORTHEAST SLANT
-        new TileInfo(12,0,
+        new TileInfo(12,100,
             new short[] {1,1,1,1,1,0,0,0,0,0,1,0,-1,1,0,1,0,2,1,1,1},
             new bool[] {true, false, true, true}),
         // 13: NORTHWEST SLANT
-        new TileInfo(13,0,
+        new TileInfo(13,100,
             new short[] {1,1,1,1,1,0,0,0,0,0,0,-1,-1,-1,0,0,2,1,1,1,1},
             new bool[] {false, true, true, true}),
         // 14: SOUTHEAST BRICKS
-        new TileInfo(14,0,
+        new TileInfo(14,100,
             new short[] {1,1,0,0,0,-1,1,1,1,1,2,0,0,2,-1,0,0,0,1,1,1},
             new bool[] {false, false, true, false}),
         // 15: SOUTHWEST BRICKS
-        new TileInfo(15,0,
+        new TileInfo(15,100,
             new short[] {},
             new bool[] {false, false, false, true}),
         // 16: NORTHEAST BRICKS
-        new TileInfo(16,0,
+        new TileInfo(16,100,
             new short[] {},
             new bool[] {false, true, false, false}),
         // 17: NORTHWEST BRICKS
-        new TileInfo(17,0,
+        new TileInfo(17,100,
             new short[] {},
             new bool[] {true, false, false, false}),
         // 18: BRICK FLOOR

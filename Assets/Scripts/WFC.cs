@@ -8,7 +8,7 @@ public class WFC : MonoBehaviour
     public static short xLen = 32, yLen = 20;
 
     int times = xLen * yLen;
-    int maxIterations = 3;
+    int maxIterations = 20;
     [SerializeField] Sprite[] allSprites;
     static Sprite[] staticAllSprites; // THIS SUCKS.
     
@@ -148,13 +148,13 @@ public class WFC : MonoBehaviour
         TilesMaster.collapsedTiles = 0;
         for (int temp = 0; temp < times * maxIterations && TilesMaster.collapsedTiles < xLen * yLen; temp++)
         {
-            Tile t = ChooseNextTile(temp > 0 ? false : true);
+            Tile t = ChooseNextTile(temp > 0 ? false : false);
 
             if (t == null) return; 
 
             t.CollapseTile();
         }
-
+        Debug.Log(TilesMaster.collapsedTiles);
         Fun();
     }
 
