@@ -146,8 +146,14 @@ public class WFC : MonoBehaviour
 
     void WaveFunctionCollapse()
     {
-        for (int temp = 0; temp < times * maxIterations && TilesMaster.collapsedTiles < xLen * yLen; temp++)
+        for (int temp = 0; TilesMaster.collapsedTiles < times; temp++)
         {
+            if(temp >= (times * maxIterations))
+            {
+                Debug.LogWarning("This took too long. Let's start again...");
+                SceneManager.LoadScene(0);
+            }
+
             Tile t = ChooseNextTile(temp > 0 ? false : true);
 
             if (t == null) break; 
@@ -177,18 +183,3 @@ public class WFC : MonoBehaviour
             "<color=magenta>{1}D</color> THIS <color=lime>{2}</color>?!", strings2[0], strings2[1], strings2[2]);
     }
 }
-
-// On Collapse, before choosing which Tile, check all neighbors to see if they're logical
-//      save the old superpositions list as a new list.
-//      IF NEW SUPERPOS. LIST == 0, then insert the old list and pick something.
-//          (in the future, if tiles have a %, obviously check this for the most logical)
-//      THEN CALL RECALCULATENEIGHBORS(), which passes in a list of possible
-//          neighbors to the tile you're using as well as it's neighbor index
-//          for the given tile (do for all neighbors THAT DO NOT MAKE SENSE!
-//                  (ie, that do not have this tile in their possible neighbors lists).
-//          THIS SHOULD recalc. the possibilities for the surrounding tiles,
-//          which will then double check if their own neighbors make sense.
-//          (calling on them if they don't, as above...)
-//
-
-
