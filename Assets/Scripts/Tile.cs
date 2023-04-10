@@ -95,9 +95,12 @@ public class Tile : MonoBehaviour
             else
             {
                 Debug.LogWarningFormat("{0} has no choices! {1}", this.name, oldSuperpositions.Count);
-                collapsed = false;
-                TilesMaster.collapsedTiles--;
-
+                if (collapsed)
+                {
+                    collapsed = false;
+                    TilesMaster.collapsedTiles--;
+                }
+                
                 if (oldSuperpositions.Count == 0)
                 {
                     AssignStartingSuperpositions(tileLoc.x, tileLoc.y);

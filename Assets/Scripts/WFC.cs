@@ -8,7 +8,7 @@ public class WFC : MonoBehaviour
     public static short xLen = 32, yLen = 20;
 
     int times = xLen * yLen;
-    int maxIterations = 20;
+    int maxIterations = 100;
     [SerializeField] Sprite[] allSprites;
     static Sprite[] staticAllSprites; // THIS SUCKS.
     
@@ -18,6 +18,7 @@ public class WFC : MonoBehaviour
     void Start()
     {
         staticAllSprites = allSprites;  //yuck
+        TilesMaster.ResetGame();
         BuildLevel();
         WaveFunctionCollapse();
     }
@@ -145,16 +146,16 @@ public class WFC : MonoBehaviour
 
     void WaveFunctionCollapse()
     {
-        TilesMaster.collapsedTiles = 0;
         for (int temp = 0; temp < times * maxIterations && TilesMaster.collapsedTiles < xLen * yLen; temp++)
         {
-            Tile t = ChooseNextTile(temp > 0 ? false : false);
+            Tile t = ChooseNextTile(temp > 0 ? false : true);
 
-            if (t == null) return; 
+            if (t == null) break; 
 
             t.CollapseTile();
         }
-        Debug.Log(TilesMaster.collapsedTiles);
+        Debug.Log("Collapsed Tiles: " + TilesMaster.collapsedTiles + " (Times: " + times + ").");
+
         Fun();
     }
 
