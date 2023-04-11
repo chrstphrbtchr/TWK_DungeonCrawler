@@ -94,7 +94,6 @@ public class Tile : MonoBehaviour
             }
             else
             {
-                Debug.LogWarningFormat("{0} has no choices! {1}", this.name, oldSuperpositions.Count);
                 if (collapsed)
                 {
                     collapsed = false;
@@ -118,16 +117,12 @@ public class Tile : MonoBehaviour
     {
         this.name = "Tile " + tileLoc.ToString() + " - " + s.ToString();
         WFC.ChangeTile(this, s);        // I HATE THIS. BUT, FOR A GAME JAM, I'LL LIVE...
-        print("ASSIGNED " + s + " TILE!");
     }
 
     void UpdateNeighborsSuperpositions(bool onCollapse, List<short> newSuperpositions, short neighborIndexOfCaller)
     {
-        string qqq = (neighborIndexOfCaller >= 0 ? neighbors[neighborIndexOfCaller].name : "Collapse method");
-        Debug.LogFormat("<color=green>{0} is updating neighbors w/ their {1} superpositions. Called from {2}.</color>", this.name, newSuperpositions.Count, qqq);
         if (!onCollapse)
         {
-            Debug.LogFormat("SUPERPOSITIONS: {0} / {1}!", superpositions.Count, newSuperpositions.Count);
             int oldSuperpositionsCount = superpositions.Count;
 
             for(int i = superpositions.Count - 1; i >= 0; i--)
@@ -159,9 +154,6 @@ public class Tile : MonoBehaviour
             else
             {
                 CalculatePossibleNeighbors(-1);
-                Debug.LogFormat("ONCOLLAPSE:{0} has these possible neighbors: {1},{2},{3},{4}.",this.name, possibleNeighboringSuperpositions[0].Count,
-                    possibleNeighboringSuperpositions[1].Count, possibleNeighboringSuperpositions[2].Count, 
-                    possibleNeighboringSuperpositions[3].Count);
                 return;
             }
         }
@@ -208,7 +200,6 @@ public class Tile : MonoBehaviour
 
                             if (!possible)
                             {
-                                Debug.LogFormat("REMOVED! {0} INDEX {1}: {2}. IgnoreIndex = {3}.", this.name, (c - 1), possibleNeighboringSuperpositions[n][c - 1], ignoreIndex);
                                 possibleNeighboringSuperpositions[n].RemoveAt(c - 1);
                             }
                         }
@@ -251,7 +242,6 @@ public class Tile : MonoBehaviour
 
                     if (!WFC.IsNeighborValid(t.sockets, n.sockets, i))
                     {
-                        Debug.LogWarningFormat("{0} is <color=magenta>not valid</color> for {1}!", this.name, neighbors[i].name);
                         this.collapsed = false;
                         neighbors[i].collapsed = false;
                         TilesMaster.collapsedTiles -= 2;
