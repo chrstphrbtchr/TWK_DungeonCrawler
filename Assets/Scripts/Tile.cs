@@ -234,7 +234,7 @@ public class Tile : MonoBehaviour
         else
         {
             int rnd = Random.Range(0, 2);
-            return (rnd == 0 ? current : challenger);
+            return (rnd == 0 ? challenger : current);
         }
     }
 

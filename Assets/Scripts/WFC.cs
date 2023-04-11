@@ -18,7 +18,7 @@ public class WFC : MonoBehaviour
     void Start()
     {
         staticAllSprites = allSprites;  //yuck
-        TilesMaster.ResetGame();
+        TilesMaster.ResetValues();
         BuildLevel();
         WaveFunctionCollapse();
     }
@@ -150,8 +150,9 @@ public class WFC : MonoBehaviour
         {
             if(temp >= (times * maxIterations))
             {
-                Debug.LogWarning("This took too long. Let's start again...");
-                SceneManager.LoadScene(0);
+                Debug.LogWarning("This took <color=red>too long</color>...");
+                //SceneManager.LoadScene(0);
+                return;
             }
 
             Tile t = ChooseNextTile(temp > 0 ? false : true);
