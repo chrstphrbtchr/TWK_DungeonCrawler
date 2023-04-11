@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8682602079062542727
+--- !u!1 &1252678246406197067
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8682602079062542725}
-  - component: {fileID: 8682602079062542724}
-  - component: {fileID: 7096941197476276883}
+  - component: {fileID: 2369886027309842453}
+  - component: {fileID: -6350931585303414152}
+  - component: {fileID: 7245376286057959116}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8682602079062542725
+--- !u!4 &2369886027309842453
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8682602079062542727}
+  m_GameObject: {fileID: 1252678246406197067}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8682602079062542724
+--- !u!212 &-6350931585303414152
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8682602079062542727}
+  m_GameObject: {fileID: 1252678246406197067}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -1234665024, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 451596380, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,26 +85,60 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7096941197476276883
+--- !u!114 &7245376286057959116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8682602079062542727}
-  m_Enabled: 1
+  m_GameObject: {fileID: 1252678246406197067}
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b06fb25f9ed5cee44bb2c15810e2f6fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileNum: 0
-  entropy: 0
-  collapsed: 0
-  tileLoc: {x: 0, y: 0}
-  superpositions: 00000100020003000400050006000700080009000a000b000c000d000e000f0010001100120013001400
-  neighbors:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  sprite: {fileID: 0}
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000753593fb
+  m_ShapePath:
+  - {x: -0.375, y: -0.1875, z: 0}
+  - {x: -0.375, y: -0.125, z: 0}
+  - {x: -0.4375, y: -0.125, z: 0}
+  - {x: -0.4375, y: 0.125, z: 0}
+  - {x: -0.375, y: 0.125, z: 0}
+  - {x: -0.375, y: 0.1875, z: 0}
+  - {x: -0.125, y: 0.1875, z: 0}
+  - {x: -0.125, y: 0.125, z: 0}
+  - {x: -0.06125, y: 0.125, z: 0}
+  - {x: -0.0625, y: 0.0625, z: 0}
+  - {x: 0, y: 0.0625, z: 0}
+  - {x: 0, y: -0.0625, z: 0}
+  - {x: 0.4375, y: -0.0625, z: 0}
+  - {x: 0.4375, y: 0.0625, z: 0}
+  - {x: -0.0625, y: 0.0625, z: 0}
+  - {x: -0.0625, y: -0.0625, z: 0}
+  - {x: -0.1875, y: -0.0625, z: 0}
+  - {x: -0.1875, y: 0.0625, z: 0}
+  - {x: -0.1875, y: 0.0625, z: 0}
+  - {x: -0.3125, y: 0.0625, z: 0}
+  - {x: -0.3125, y: -0.0625, z: 0}
+  - {x: -0.0625, y: -0.0625, z: 0}
+  - {x: -0.06125, y: -0.125, z: 0}
+  - {x: 0.375, y: -0.125, z: 0}
+  - {x: 0.375, y: -0.25, z: 0}
+  - {x: 0.25, y: -0.25, z: 0}
+  - {x: 0.25, y: -0.1875, z: 0}
+  - {x: 0.1875, y: -0.1875, z: 0}
+  - {x: 0.1875, y: -0.25, z: 0}
+  - {x: 0.125, y: -0.25, z: 0}
+  - {x: 0.125, y: -0.12506221, z: 0}
+  - {x: -0.06125, y: -0.125, z: 0}
+  - {x: -0.125, y: -0.125, z: 0}
+  - {x: -0.125, y: -0.1875, z: 0}
+  m_ShapePathHash: -2031697791
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 48396

@@ -13,7 +13,9 @@ public class WFC : MonoBehaviour
     static Sprite[] staticAllSprites; // THIS SUCKS.
     
     public GameObject tile;
-    public Tile[,] tileArray = new Tile[xLen, yLen];
+    public static Tile[,] tileArray = new Tile[xLen, yLen];
+
+    [SerializeField] ShadowMaster shadowMaster;
 
     void Start()
     {
@@ -21,6 +23,7 @@ public class WFC : MonoBehaviour
         TilesMaster.ResetValues();
         BuildLevel();
         WaveFunctionCollapse();
+        shadowMaster.AssignShadows();
     }
 
     private void Update()
