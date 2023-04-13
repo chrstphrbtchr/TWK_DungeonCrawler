@@ -15,6 +15,7 @@ public class WFC : MonoBehaviour
     public GameObject tile;
     public static Tile[,] tileArray = new Tile[xLen, yLen];
 
+    public AreaSetup areaSetup = new AreaSetup();
     [SerializeField] ShadowMaster shadowMaster;
 
     void Start()
@@ -24,6 +25,7 @@ public class WFC : MonoBehaviour
         BuildLevel();
         WaveFunctionCollapse();
         shadowMaster.AssignShadows();
+        List<Tile> playableArea = areaSetup.FindPlayableArea(areaSetup.FindWalkableTiles());
     }
 
     private void Update()
