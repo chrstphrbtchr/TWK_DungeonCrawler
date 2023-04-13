@@ -40,7 +40,7 @@ public static class TilesMaster
             new bool[] {true, false, true, true}),
         // 8: SOUTH WALL
         new TileInfo(8,100,
-            new short[] {0,-1,-4,-4,-4,-3,-3,-4,-3,-3,-3,-3,-3,-3,-3,-3,-2,-3,0,0,0},
+            new short[] {0,-1,-4,-4,-4,-3,-3,-4,-3,-4,-3,-3,-3,-3,-3,-3,-2,-3,0,0,0},
             new bool[] {false, false, true, true}),
         // 9: SE CORNER
         new TileInfo(9,100,
