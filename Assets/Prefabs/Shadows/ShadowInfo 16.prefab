@@ -63,13 +63,33 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3844965042801253951, guid: 736a2fda60aae234590428f6b6bc0649, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844965042801253951, guid: 736a2fda60aae234590428f6b6bc0649, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844965042801253951, guid: 736a2fda60aae234590428f6b6bc0649, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844965042801253951, guid: 736a2fda60aae234590428f6b6bc0649, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844965042801253951, guid: 736a2fda60aae234590428f6b6bc0649, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
+      value: 0.375
+      objectReference: {fileID: 0}
     - target: {fileID: 5706047452774643287, guid: 736a2fda60aae234590428f6b6bc0649, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5706047452774643287, guid: 736a2fda60aae234590428f6b6bc0649, type: 3}
       propertyPath: m_InstanceId
-      value: -534828
+      value: -771170
       objectReference: {fileID: 0}
     - target: {fileID: 5706047452774643287, guid: 736a2fda60aae234590428f6b6bc0649, type: 3}
       propertyPath: m_SelfShadows
