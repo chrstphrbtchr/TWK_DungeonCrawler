@@ -6,53 +6,37 @@ public class CharacterHandler : MonoBehaviour
 {
     public GameObject player;
     public GameObject door;
-    public GameObject key; /*
-    public GameObject chest;
+    public GameObject key;
+    public GameObject shield;
 
     public GameObject[] monsters;
-    public GameObject[] items; */
+    
 
     public void PlacePieces(List<Tile> places)
     {
         bool placed = false;
         Tile t = null;
         Vector2 temp = Vector2.zero, baseOffset = new Vector2(0.5f, 0.5f);
-        while(!placed)
-        {
-            t = places[Random.Range(0, places.Count)];
-            places.Remove(t);
-            if (CheckValidity(t))
-            {
-                temp = ((baseOffset * t.tileLoc) + GetOffset(t));
-                Instantiate(player, temp, Quaternion.identity);
-                placed = true;
-            }
-        }
-        placed = false;
-        while (!placed)
-        {
-            t = places[Random.Range(0, places.Count)];
-            places.Remove(t);
-            if (CheckValidity(t))
-            {
-                temp = ((baseOffset * t.tileLoc) + GetOffset(t));
-                Instantiate(door, temp, Quaternion.identity);
-                placed = true;
-            }
-        }
-        placed = false;
-        while (!placed)
-        {
-            t = places[Random.Range(0, places.Count)];
-            places.Remove(t);
-            if (CheckValidity(t))
-            {
-                temp = ((baseOffset * t.tileLoc) + GetOffset(t));
-                Instantiate(key, temp, Quaternion.identity);
-                placed = true;
-            }
-        }
+        PlacementHelper(player);
+        PlacementHelper(key);
+        PlacementHelper(door);
+        PlacementHelper(monsters[0]);   // FIX LATER, JUST FOR TESTING NOW....
 
+        void PlacementHelper(GameObject g)
+        {
+            placed = false;
+            while (!placed)
+            {
+                t = places[Random.Range(0, places.Count)];
+                places.Remove(t);
+                if (CheckValidity(t))
+                {
+                    temp = ((baseOffset * t.tileLoc) + GetOffset(t));
+                    Instantiate(g, temp, Quaternion.identity);
+                    placed = true;
+                }
+            }
+        }
 
         bool CheckValidity(Tile t)
         {

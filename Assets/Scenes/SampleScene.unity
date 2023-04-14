@@ -901,6 +901,9 @@ MonoBehaviour:
   player: {fileID: 4643697406996538259, guid: 4b7ccedacd55dd049a5c70b93dd8d144, type: 3}
   door: {fileID: 7516061020022617218, guid: 46850ea656734a443b13ce4b8840a29d, type: 3}
   key: {fileID: 1252678246406197067, guid: 00dd06ca9bdb1e44d895448c17f52289, type: 3}
+  shield: {fileID: 0}
+  monsters:
+  - {fileID: 1252678246406197067, guid: 366a1644da59c2c43b3bda8219af8a34, type: 3}
 --- !u!4 &1179368899
 Transform:
   m_ObjectHideFlags: 0
