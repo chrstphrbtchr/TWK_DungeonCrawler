@@ -94,7 +94,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252678246406197067}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
   m_Name: 
@@ -103,8 +103,8 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_HasRenderer: 1
   m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
+  m_CastsShadows: 0
+  m_SelfShadows: 1
   m_ApplyToSortingLayers: 00000000753593fb
   m_ShapePath:
   - {x: -0.375, y: -0.1875, z: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   - {x: -0.125, y: -0.1875, z: 0}
   m_ShapePathHash: -2031697791
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1250
+  m_InstanceId: 124462
 --- !u!61 &1941415776032075315
 BoxCollider2D:
   m_ObjectHideFlags: 0

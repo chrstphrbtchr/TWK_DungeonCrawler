@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7933313971249106403}
   - component: {fileID: 3853703693799632808}
   - component: {fileID: 3770998172567233372}
+  - component: {fileID: 5004922019308209301}
   m_Layer: 0
   m_Name: Trap Door
   m_TagString: Untagged
@@ -125,6 +126,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0f308f3909df74d809fce90e5da5e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5004922019308209301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7516061020022617218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 0
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 00000000250df6a0753593fb
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 124424
 --- !u!1 &7920849548014192920
 GameObject:
   m_ObjectHideFlags: 0
