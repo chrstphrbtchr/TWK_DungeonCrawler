@@ -6,6 +6,7 @@ public abstract class Enemy : MonoBehaviour
 {
     public Vector2 nextLocation;
     public GameObject player;
+    public Rigidbody2D rb;
     public bool aggro, moving;
     public float speed, timeTilMove, timeTilMoveMax;
 
