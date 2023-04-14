@@ -13,8 +13,15 @@ public class Blob : Enemy
     
     public override void GetNextLocation()
     {
-        Vector2 temp = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
-        nextLocation = (temp * 0.5f);
+        if (aggro && player != null)
+        {
+            nextLocation = -(this.transform.position - player.transform.position);
+        }
+        else
+        {
+            Vector2 temp = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+            nextLocation = (temp * 0.5f);
+        }
     }
 
     void Update()

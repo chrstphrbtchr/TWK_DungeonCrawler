@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1941415776032075315}
   - component: {fileID: 3969985058716020381}
   - component: {fileID: 4814894634434293620}
+  - component: {fileID: -1367681324654581852}
   m_Layer: 0
   m_Name: Blob
   m_TagString: Untagged
@@ -51,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLocation: {x: 0, y: 0}
   player: {fileID: 0}
+  rb: {fileID: 0}
   aggro: 0
   moving: 0
   speed: 0
@@ -164,7 +166,7 @@ MonoBehaviour:
   - {x: -0.125, y: -0.1875, z: 0}
   m_ShapePathHash: -2031697791
   m_Mesh: {fileID: 0}
-  m_InstanceId: 53102
+  m_InstanceId: 56446
 --- !u!61 &1941415776032075315
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -290,3 +292,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &-1367681324654581852
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252678246406197067}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2

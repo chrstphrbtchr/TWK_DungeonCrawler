@@ -33,10 +33,7 @@ public class WFC : MonoBehaviour
     private void Update()
     {
 #if UNITY_EDITOR
-        if(Input.GetKeyDown(KeyCode.Return))
-        {
-            SceneManager.LoadScene(0);
-        }
+        ResetEverything();
 #endif
     }
 
@@ -172,6 +169,14 @@ public class WFC : MonoBehaviour
         Debug.Log("Collapsed Tiles: " + TilesMaster.collapsedTiles + " (Times: " + temp + ").");
 
         Fun();
+    }
+
+    public static void ResetEverything()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void Fun()

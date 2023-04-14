@@ -18,4 +18,31 @@ public abstract class Enemy : MonoBehaviour
     }
 
     public abstract IEnumerator MoveEnemy();
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Player")
+        {
+            if (player == null) player = collision.gameObject;
+            player.GetComponent<PlayerMove>().KillPlayer();
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            if (player == null) player = collision.gameObject;
+            aggro = true;
+            Debug.Log("ENTER!!");
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            aggro = false;
+        }
+    }
 }

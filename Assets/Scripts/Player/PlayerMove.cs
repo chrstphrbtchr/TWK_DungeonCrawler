@@ -38,6 +38,19 @@ public class PlayerMove : MonoBehaviour
 
         movementInput = new Vector2 (horizontal, vertical);
         rb.velocity = movementInput * speed * Time.deltaTime;
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.tag == "Enemy")
+        {
+            KillPlayer();
+        }
+    }
+
+    public void KillPlayer()
+    {
+        Destroy(this.gameObject);
+        Debug.Log("Y O U   H A V E   D I E D .");
     }
 }

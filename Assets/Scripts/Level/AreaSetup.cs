@@ -1,12 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AreaSetup
 {
     public List<Tile> FindWalkableTiles()
     {
+        int badTiles = 0;
         List<Tile> result = new List<Tile>();
 
         for(int x = 0; x < WFC.xLen; x++)
@@ -18,8 +17,21 @@ public class AreaSetup
                 {
                     result.Add(t);
                 }
+
+                if (!t.collapsed)
+                {
+                    badTiles++;
+                }
             }
         }
+
+        // Just in case too many un-collapsed tiles exist.
+        if( badTiles > (WFC.xLen >= WFC.yLen ? WFC.yLen : WFC.xLen) )
+        {
+            Debug.LogWarningFormat("Reset due to <color=#261B23>{0}</color> uncollapsed tiles.", badTiles);
+            WFC.ResetEverything();
+        }
+
         return result;
     }
 
