@@ -8,7 +8,7 @@ public static class TilesMaster
     {
         // 0: NEGATIVE SPACE!
         new TileInfo(0, 20,
-            new short[] {-5,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,2,1,1},
+            new short[] {-5,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,1,0,0},
             new bool[] {true, true, true, true}),
         // 1: JUST FLOOR!
         new TileInfo(1,100,
@@ -48,19 +48,19 @@ public static class TilesMaster
             new bool[] {false, true, true, true}),
         // 10: SOUTHEAST SLANT
         new TileInfo(10,100,
-            new short[] {-2,1,-2,-3,-4,-3,-3,-4,-3,-4,-5,-5,-3,-4,-3,-3,-3,-5,0,-1,0},
+            new short[] {-2,1,-2,-3,-4,-3,-3,-4,-3,-4,-5,-5,-3,-4,-3,-3,-3,-5,1,-1,0},
             new bool[] {true, true, false, true}),
         // 11: SOUTHWEST SLANT
         new TileInfo(11,100,
-            new short[] {-2,1,-4,-3,-2,-3,-3,-4,-3,-4,-5,-5,-4,-3,-3,-3,-5,-3,0,-1,0},
+            new short[] {-2,1,-4,-3,-2,-3,-3,-4,-3,-4,-5,-5,-4,-3,-3,-3,-5,-3,1,-1,0},
             new bool[] {true, true, true, false}),
         // 12: NORTHEAST SLANT
         new TileInfo(12,100,
-            new short[] {-2,1,-4,-3,-4,-3,-3,-2,-3,-4,-3,-4,-5,-5,-3,-5,-3,-3,0,0,-1},
+            new short[] {-2,1,-4,-3,-4,-3,-3,-2,-3,-4,-3,-4,-5,-5,-3,-5,-3,-3,1,0,-1},
             new bool[] {true, false, true, true}),
         // 13: NORTHWEST SLANT
         new TileInfo(13,100,
-            new short[] {-2,1,-4,-3,-4,-3,-3,-4,-3,-2,-4,-3,-5,-5,-5,-3,-3,-3,0,0,-1},
+            new short[] {-2,1,-4,-3,-4,-3,-3,-4,-3,-2,-4,-3,-5,-5,-5,-3,-3,-3,1,0,-1},
             new bool[] {false, true, true, true}),
         // 14: SOUTHEAST BRICKS
         new TileInfo(14,100,
@@ -80,15 +80,15 @@ public static class TilesMaster
             new bool[] {true, false, false, false}),
         // 18: BRICK FLOOR
         new TileInfo(18,100,
-            new short[] { 2, 0, 1, 2, 1, 2, 2, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, -30,-15,-15},
+            new short[] { 2, 0, 1, 2, 1, 2, 2, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, -35,-20,-15},
             new bool[] {false, false, false, false}),
         // 19: HUMAN BONES!
         new TileInfo(19,100,
-            new short[] { 2, 0, 3, 1, 3, 0, 0, 3, 1, 3, 2, 2, 2, 2, 2, 2, 2, 2, -15,-30,-15},
+            new short[] { 2, 0, 3, 1, 3, 0, 0, 3, 1, 3, 2, 2, 2, 2, 2, 2, 2, 2, -15,-35,-20},
             new bool[] {false, false, false, false}),
         // 20: MONSTER BONES!
         new TileInfo(20,100,
-            new short[] { 2, 0, 1, 3, 1, 0, 0, 1, 3, 1, 2, 2, 2, 2, 1, 1, 1, 1, -15,-15,-30},
+            new short[] { 2, 0, 1, 3, 1, 0, 0, 1, 3, 1, 2, 2, 2, 2, 1, 1, 1, 1, -20,-15,-35},
             new bool[] {false, false, false, false})
     };
 

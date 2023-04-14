@@ -28,10 +28,10 @@ public class ShadowMaster : MonoBehaviour
     {
         foreach(Tile t in WFC.tileArray)
         {
-            if(t.collapsed)
+            if (t.collapsed || t.tileNum != 0)
             {
                 GameObject g = GetShadow(t.tileNum);
-                if(g != null)
+                if (g != null)
                 {
                     Instantiate(g, t.transform);
                 }

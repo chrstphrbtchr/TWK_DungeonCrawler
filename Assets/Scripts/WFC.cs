@@ -11,11 +11,12 @@ public class WFC : MonoBehaviour
     int maxIterations = 300;
     [SerializeField] Sprite[] allSprites;
     static Sprite[] staticAllSprites; // THIS SUCKS.
-    
+
     public GameObject tile;
+    public CharacterHandler characterHandler;
     public static Tile[,] tileArray = new Tile[xLen, yLen];
 
-    public AreaSetup areaSetup = new AreaSetup();
+    [SerializeField] AreaSetup areaSetup = new AreaSetup();
     [SerializeField] ShadowMaster shadowMaster;
 
     void Start()
@@ -26,6 +27,7 @@ public class WFC : MonoBehaviour
         WaveFunctionCollapse();
         shadowMaster.AssignShadows();
         List<Tile> playableArea = areaSetup.FindPlayableArea(areaSetup.FindWalkableTiles());
+        characterHandler.PlacePieces(playableArea);
     }
 
     private void Update()
