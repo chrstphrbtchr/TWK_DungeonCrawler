@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Ghost : MultiStateEnemy
 {
+    public GameObject home;
     public override void GetNextLocation()
     {
         throw new System.NotImplementedException();
