@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Skeleton : MultiStateEnemy
 {
+    [SerializeField] Sprite skeleSprite;
+    [SerializeField] Sprite bonesSprite;
+    SpriteRenderer spRend;
     public override void GetNextLocation()
     {
         throw new System.NotImplementedException();
@@ -16,18 +19,20 @@ public class Skeleton : MultiStateEnemy
 
     public override void OnAggroBegin()
     {
-        throw new System.NotImplementedException();
+        // get out of bones mode
+        // get into skeleton mode
+        
     }
 
     public override void OnAggroEnd()
     {
-        throw new System.NotImplementedException();
+        // become bones again...
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        spRend = GetComponent<SpriteRenderer>();
+        spRend.sprite = bonesSprite;
     }
 
     // Update is called once per frame

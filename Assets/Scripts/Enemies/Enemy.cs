@@ -34,7 +34,6 @@ public abstract class Enemy : MonoBehaviour
         {
             if (player == null) player = collision.gameObject;
             aggro = true;
-            Debug.Log("ENTER!!");
         }
     }
 

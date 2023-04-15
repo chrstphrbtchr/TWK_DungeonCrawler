@@ -7,7 +7,7 @@ public class Blob : Enemy
     {
         timeTilMove = 0;
         timeTilMoveMax = 1.75f;
-        speed = 95;
+        speed = 150;
         rb = GetComponent<Rigidbody2D>();
     }
     

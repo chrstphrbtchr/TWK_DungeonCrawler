@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1769394182814572483}
   - component: {fileID: 3012854413312072843}
   - component: {fileID: 4420833233655468476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: -6226178088104767012}
   - component: {fileID: 4016806859769845204}
   - component: {fileID: 736873339782228499}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: -2057081043, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.3417201, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 3853185501195300430}
   - component: {fileID: 2968409469134241080}
   - component: {fileID: 1943981288070436890}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CM vcam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

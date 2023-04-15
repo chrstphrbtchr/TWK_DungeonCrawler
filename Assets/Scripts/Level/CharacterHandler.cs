@@ -21,6 +21,7 @@ public class CharacterHandler : MonoBehaviour
         PlacementHelper(key);
         PlacementHelper(door);
         PlacementHelper(monsters[0]);   // FIX LATER, JUST FOR TESTING NOW....
+        PlacementHelper(monsters[1]);   // SEE ABOVE..........................
 
         void PlacementHelper(GameObject g)
         {
