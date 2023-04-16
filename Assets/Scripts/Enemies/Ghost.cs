@@ -95,7 +95,6 @@ public class Ghost : MultiStateEnemy
             alpha += (fadeOut ? -Time.deltaTime : Time.deltaTime) * 5.75f;
             alpha = Mathf.Clamp01(alpha);
             Color fixedAlpha = new Color(sprite.color.r, sprite.color.g, sprite.color.b, alpha);
-            Debug.LogFormat("GHOST: {0} / {1}", sprite.color.a, alpha);
             sprite.color = fixedAlpha;
             yield return new WaitForSeconds(0.25f);
         }

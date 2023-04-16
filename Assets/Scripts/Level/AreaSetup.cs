@@ -26,7 +26,7 @@ public class AreaSetup
         }
 
         // Just in case too many un-collapsed tiles exist.
-        if( badTiles > (WFC.xLen >= WFC.yLen ? WFC.yLen : WFC.xLen) )
+        if( badTiles > (WFC.xLen >= WFC.yLen ? WFC.yLen : WFC.xLen) / 2)
         {
             Debug.LogWarningFormat("Reset due to <color=#261B23>{0}</color> uncollapsed tiles.", badTiles);
             WFC.ResetEverything();

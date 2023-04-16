@@ -21,12 +21,14 @@ public class Skeleton : MultiStateEnemy
     {
         // get out of bones mode
         // get into skeleton mode
+        aggro = true;
         
     }
 
     public override void OnAggroEnd()
     {
         // become bones again...
+        aggro = false;
     }
 
     void Awake()
