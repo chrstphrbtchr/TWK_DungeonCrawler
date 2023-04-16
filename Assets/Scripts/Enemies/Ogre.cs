@@ -4,6 +4,34 @@ using UnityEngine;
 
 public class Ogre : Enemy
 {
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        timeTilMove = 0;
+        moveTimeRange = new Vector2(1f, 4f);
+        timeTilMoveMax = GetRandomMoveTime();
+        speed = 70f;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (ReadyToMove() || (aggro && !moving))
+        {
+            StartCoroutine(MoveEnemy());
+        }
+
+        if (!moving && !aggro)
+        {
+            this.timeTilMove += Time.deltaTime;
+        }
+
+        if (!aggro && CanSeePlayer())
+        {
+            aggro = true;
+        }
+    }
+
     public override void GetNextLocation()
     {
         if (aggro && player != null)
@@ -12,7 +40,7 @@ public class Ogre : Enemy
         }
         else
         {
-            Vector2 temp = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+            Vector2 temp = new Vector2(Random.Range(-2, 2), Random.Range(-2, 2));
             nextLocation = (temp * 0.5f);
         }
     }
@@ -30,7 +58,7 @@ public class Ogre : Enemy
                 time += Time.deltaTime;
                 yield return null;
             }
-            nextLocation = Vector2.zero;
+            nextLocation = transform.position;
             timeTilMove = 0;
         }
         else
@@ -42,36 +70,11 @@ public class Ogre : Enemy
                 yield return null;
             }
         }
+        timeTilMoveMax = GetRandomMoveTime();
         this.moving = false;
         yield return null;
     }
 
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        timeTilMove = 0;
-        timeTilMoveMax = 3f;
-        speed = 90f;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (ReadyToMove() || (aggro && !moving))
-        {
-            StartCoroutine(MoveEnemy());
-        }
-
-        if (!moving && !aggro)
-        {
-            this.timeTilMove += Time.deltaTime;
-        }
-
-        if(!aggro && CanSeePlayer())
-        {
-            aggro = true;
-        }
-    }
 
     public new void OnTriggerEnter2D(Collider2D collision)
     {

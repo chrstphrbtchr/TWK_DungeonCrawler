@@ -45,6 +45,7 @@ public class WFC : MonoBehaviour
             {
                 Tile t = Instantiate(tile, new Vector2(x * spawnOffset, y * spawnOffset),
                     Quaternion.identity).GetComponent<Tile>();
+                t.gameObject.transform.parent = this.transform;
                 t.name = "Tile [" + x + ", " + y + "]";
                 tileArray[x, y] = t;
 

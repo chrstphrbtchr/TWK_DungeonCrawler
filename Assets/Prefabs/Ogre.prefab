@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLocation: {x: 0, y: 0}
+  moveTimeRange: {x: 0, y: 0}
   player: {fileID: 0}
   rb: {fileID: 0}
   aggro: 0
@@ -95,8 +96,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1466260699
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 131210698, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
   m_Color: {r: 1, g: 0.22297573, b: 0, a: 1}
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_UseRendererSilhouette: 1
   m_CastsShadows: 0
   m_SelfShadows: 1
-  m_ApplyToSortingLayers: 00000000250df6a0753593fb
+  m_ApplyToSortingLayers: 00000000250df6a025a39aa8753593fb
   m_ShapePath:
   - {x: -0.375, y: -0.1875, z: 0}
   - {x: -0.375, y: -0.125, z: 0}
@@ -165,7 +166,7 @@ MonoBehaviour:
   - {x: -0.125, y: -0.1875, z: 0}
   m_ShapePathHash: -2031697791
   m_Mesh: {fileID: 0}
-  m_InstanceId: 60540
+  m_InstanceId: 46742
 --- !u!61 &1941415776032075315
 BoxCollider2D:
   m_ObjectHideFlags: 0

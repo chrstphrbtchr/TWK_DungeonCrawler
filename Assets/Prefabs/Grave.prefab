@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2369886027309842453}
+  - component: {fileID: 4209194538603837177}
   - component: {fileID: -6350931585303414152}
   - component: {fileID: 7245376286057959116}
   - component: {fileID: 1941415776032075315}
@@ -36,6 +37,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4209194538603837177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252678246406197067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e8f13398d4015489d5e19e3f0be6be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostPrefab: {fileID: 1252678246406197067, guid: 7036e195e28c17346baf8728c44f7533, type: 3}
+  ghostSpawned: 0
 --- !u!212 &-6350931585303414152
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74,8 +89,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1594487515
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: 35943221, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
   m_Color: {r: 0.8396226, g: 0.73268956, b: 0.7817616, a: 1}
@@ -104,9 +119,9 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_HasRenderer: 1
   m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
+  m_CastsShadows: 0
   m_SelfShadows: 1
-  m_ApplyToSortingLayers: 00000000250df6a0753593fb
+  m_ApplyToSortingLayers: 00000000250df6a025a39aa8753593fb
   m_ShapePath:
   - {x: -0.25, y: -0.3725, z: 0}
   - {x: -0.25, y: -0.31275, z: 0}
@@ -135,7 +150,7 @@ MonoBehaviour:
   - {x: 0.1875, y: -0.375, z: 0}
   m_ShapePathHash: -1459014109
   m_Mesh: {fileID: 0}
-  m_InstanceId: 61120
+  m_InstanceId: 46786
 --- !u!61 &1941415776032075315
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -182,7 +197,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!61 &3346239191766780329
 BoxCollider2D:
   m_ObjectHideFlags: 0

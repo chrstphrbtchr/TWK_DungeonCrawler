@@ -6,8 +6,9 @@ public class Blob : Enemy
     private void Awake()
     {
         timeTilMove = 0;
-        timeTilMoveMax = 1.75f;
-        speed = 150;
+        moveTimeRange = new Vector2(0.25f, 2.1f);
+        timeTilMoveMax = GetRandomMoveTime();
+        speed = 83f;
         rb = GetComponent<Rigidbody2D>();
     }
     
@@ -15,7 +16,7 @@ public class Blob : Enemy
     {
         if (aggro && player != null)
         {
-            nextLocation = -(this.transform.position - player.transform.position);
+            nextLocation = (this.transform.position - player.transform.position) * -0.5f;
         }
         else
         {
@@ -48,8 +49,9 @@ public class Blob : Enemy
             time += Time.deltaTime;
             yield return null;
         }
-        nextLocation = Vector2.zero;
+        nextLocation = transform.position;
         timeTilMove = 0;
+        timeTilMoveMax = GetRandomMoveTime();
         this.moving = false;
         yield return null;
     }

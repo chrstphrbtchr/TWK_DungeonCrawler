@@ -10,7 +10,9 @@ public class CharacterHandler : MonoBehaviour
     public GameObject shield;
 
     public GameObject[] monsters;
-    
+
+    public static int monstersToMake = 5;
+    Vector2 playerLocation;
 
     public void PlacePieces(List<Tile> places)
     {
@@ -20,27 +22,33 @@ public class CharacterHandler : MonoBehaviour
         PlacementHelper(player);
         PlacementHelper(key);
         PlacementHelper(door);
-        PlacementHelper(monsters[0]);   // FIX LATER, JUST FOR TESTING NOW....
-        PlacementHelper(monsters[1]);   // SEE ABOVE..........................
+        for(int i = 0; i < monstersToMake; i++)
+        {
+            int rnd = Random.Range(0, monsters.Length);
+            PlacementHelper(monsters[rnd], (rnd >= 2 ? true : false));
+        }
 
-        void PlacementHelper(GameObject g)
+        void PlacementHelper(GameObject g, bool floorsOnly=false)
         {
             placed = false;
             while (!placed)
             {
                 t = places[Random.Range(0, places.Count)];
                 places.Remove(t);
-                if (CheckValidity(t))
+                if (CheckValidity(t, floorsOnly))
                 {
                     temp = ((baseOffset * t.tileLoc) + GetOffset(t));
                     Instantiate(g, temp, Quaternion.identity);
                     placed = true;
                 }
             }
+            if(g == player) { playerLocation = g.transform.position; }
         }
 
-        bool CheckValidity(Tile t)
+        bool CheckValidity(Tile t, bool floorsOnly=false)
         {
+            if (floorsOnly && t.tileNum != 1) return false;
+
             switch (t.tileNum)
             {
                 case -1:

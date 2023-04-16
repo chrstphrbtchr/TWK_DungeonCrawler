@@ -5,15 +5,19 @@ using UnityEngine;
 public class Grave : MonoBehaviour
 {
     public GameObject ghostPrefab;
-    bool ghostSpawned;
+    public bool ghostSpawned;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.collider.tag == "Player" && !ghostSpawned)
+        if (collision.tag != "Player") return;
+
+        if(!ghostSpawned)
         {
             ghostSpawned = true;
-            Ghost boo = Instantiate(ghostPrefab, this.transform.position, Quaternion.identity).GetComponent<Ghost>();
+            Ghost boo = Instantiate(ghostPrefab, this.transform.position, 
+                Quaternion.identity).GetComponent<Ghost>();
             boo.home = this.gameObject;
+            boo.player = collision.gameObject;
         }
     }
 }

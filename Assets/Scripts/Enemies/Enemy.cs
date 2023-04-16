@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    public Vector2 nextLocation;
+    public Vector2 nextLocation, moveTimeRange;
     public GameObject player;
     public Rigidbody2D rb;
     public bool aggro, moving;
@@ -18,6 +18,11 @@ public abstract class Enemy : MonoBehaviour
     }
 
     public abstract IEnumerator MoveEnemy();
+
+    public float GetRandomMoveTime()
+    {
+        return Random.Range(moveTimeRange.x, moveTimeRange.y);
+    }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
