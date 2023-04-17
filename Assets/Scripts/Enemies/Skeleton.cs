@@ -15,7 +15,7 @@ public class Skeleton : MultiStateEnemy
 
     public override void GetNextLocation()
     {
-        if(player == null) nextLocation = transform.position;
+        if(player == null) nextLocation = this.transform.position;
         timeTilMoveMax = GetRandomMoveTime();
         nextLocation = player.transform.position;
     }
@@ -62,7 +62,7 @@ public class Skeleton : MultiStateEnemy
         timeTilMove = 0;
         moveTimeRange = new Vector2(0.5f, 1.25f);
         timeTilMoveMax = GetRandomMoveTime();
-        speed = 0.025f;
+        speed = 0.0175f;
         doneSpawning = false;
     }
 
@@ -96,6 +96,7 @@ public class Skeleton : MultiStateEnemy
         {
             //if (player == null) player = collision.gameObject;
             player.GetComponent<PlayerMove>().KillPlayer();
+            aggro = false;
         }
     }
 
