@@ -24,19 +24,12 @@ public class Skeleton : MultiStateEnemy
         moving = true;
         float timer = 0;
         GetNextLocation();
-        //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(0.125f);
         while(timer < timeTilMoveMax)
         {
             rb.velocity = nextLocation * speed * Time.deltaTime;
             timer += Time.deltaTime;
-            /*
-            transform.position = Vector2.Lerp(transform.position, 
-                nextLocation, timer/timeTilMoveMax);
-            
-            yield return new WaitForSeconds(0.01f);*/
         }
-        //rb.constraints = RigidbodyConstraints2D.FreezeAll;
         timeTilMove = 0;
         moving = false;
         yield return null;
@@ -135,6 +128,9 @@ public class Skeleton : MultiStateEnemy
 
     IEnumerator OutOfAggro()
     {
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        box.size = new Vector2(bcOff, bcOff);
+
         for (int i = 0; i < 4; i++)
         {
             spRend.sprite = bonesSprite;
@@ -145,11 +141,8 @@ public class Skeleton : MultiStateEnemy
         }
         yield return new WaitForSeconds(0.025f);
         spRend.sprite = bonesSprite;
-
         aggro = false;
         doneSpawning = false;
-        rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        box.size = new Vector2(bcOff, bcOff);
         yield return null;
     }
 }
