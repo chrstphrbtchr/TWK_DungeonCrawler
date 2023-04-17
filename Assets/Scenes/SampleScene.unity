@@ -822,6 +822,7 @@ GameObject:
   - component: {fileID: 1886086327}
   - component: {fileID: 1886086329}
   - component: {fileID: 1886086328}
+  - component: {fileID: 1886086330}
   m_Layer: 5
   m_Name: In / Out of Scene
   m_TagString: Untagged
@@ -887,6 +888,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886086326}
   m_CullTransparentMesh: 1
+--- !u!114 &1886086330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886086326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d401569d78a5a84fad9b2b7f7806385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionMat: {fileID: 2100000, guid: daa7d6b9893b8c544bef3cf305138637, type: 2}
 --- !u!1 &2078431788
 GameObject:
   m_ObjectHideFlags: 0

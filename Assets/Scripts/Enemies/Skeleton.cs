@@ -24,6 +24,7 @@ public class Skeleton : MultiStateEnemy
         moving = true;
         float timer = 0;
         GetNextLocation();
+        //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(0.125f);
         while(timer < timeTilMoveMax)
         {
@@ -35,6 +36,7 @@ public class Skeleton : MultiStateEnemy
             
             yield return new WaitForSeconds(0.01f);*/
         }
+        //rb.constraints = RigidbodyConstraints2D.FreezeAll;
         timeTilMove = 0;
         moving = false;
         yield return null;

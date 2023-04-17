@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviour
     {
         if(collision.collider.tag == "Enemy")
         {
-            KillPlayer();
+            //KillPlayer();
         }
     }
 
@@ -52,5 +52,6 @@ public class PlayerMove : MonoBehaviour
     {
         Destroy(this.gameObject);
         Debug.Log("Y O U   H A V E   D I E D .");
+        ScreenTransition.beginTransition = true;
     }
 }

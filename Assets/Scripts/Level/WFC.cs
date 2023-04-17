@@ -176,7 +176,8 @@ public class WFC : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(0);
+            ScreenTransition.beginTransition = true;
         }
     }
 
