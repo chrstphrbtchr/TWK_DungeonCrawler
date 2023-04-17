@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Skeleton : MultiStateEnemy
@@ -17,18 +16,24 @@ public class Skeleton : MultiStateEnemy
     {
         if(player == null) nextLocation = this.transform.position;
         timeTilMoveMax = GetRandomMoveTime();
-        nextLocation = player.transform.position;
+        nextLocation = -(this.transform.position - player.transform.position);
     }
 
     public override IEnumerator MoveEnemy()
     {
         moving = true;
+        float timer = 0;
         GetNextLocation();
-        while(timeTilMove < timeTilMoveMax)
+        yield return new WaitForSeconds(0.125f);
+        while(timer < timeTilMoveMax)
         {
-            transform.position = Vector2.MoveTowards(transform.position, 
-                nextLocation, speed * Time.deltaTime);
-            timeTilMove += Time.deltaTime;
+            rb.velocity = nextLocation * speed * Time.deltaTime;
+            timer += Time.deltaTime;
+            /*
+            transform.position = Vector2.Lerp(transform.position, 
+                nextLocation, timer/timeTilMoveMax);
+            
+            yield return new WaitForSeconds(0.01f);*/
         }
         timeTilMove = 0;
         moving = false;
@@ -60,9 +65,9 @@ public class Skeleton : MultiStateEnemy
         spRend = GetComponent<SpriteRenderer>();
         spRend.sprite = bonesSprite;
         timeTilMove = 0;
-        moveTimeRange = new Vector2(0.5f, 1.25f);
+        moveTimeRange = new Vector2(0.25f, 1f);
         timeTilMoveMax = GetRandomMoveTime();
-        speed = 0.0175f;
+        speed = 130f;
         doneSpawning = false;
     }
 
@@ -71,7 +76,14 @@ public class Skeleton : MultiStateEnemy
     {
         if(aggro && !moving)
         {
-            StartCoroutine(MoveEnemy());
+            if (ReadyToMove())
+            {
+                StartCoroutine(MoveEnemy());
+            }
+            else
+            {
+                timeTilMove += Time.deltaTime;
+            }
         }
     }
 
@@ -124,9 +136,9 @@ public class Skeleton : MultiStateEnemy
         for (int i = 0; i < 4; i++)
         {
             spRend.sprite = bonesSprite;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.075f);
             spRend.sprite = skeleSprite;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.075f);
             
         }
         yield return new WaitForSeconds(0.025f);
