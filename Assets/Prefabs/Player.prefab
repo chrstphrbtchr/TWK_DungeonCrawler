@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 4335001563467079304}
   - component: {fileID: 2155879425769869521}
   - component: {fileID: -8125655760366509255}
+  - component: {fileID: 6817106270165625275}
   - component: {fileID: -6226178088104767012}
   - component: {fileID: 4016806859769845204}
   - component: {fileID: 736873339782228499}
@@ -208,6 +209,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6817106270165625275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4643697406996538259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a35d7b510d4d4b9142e164cd05c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lite: {fileID: -6226178088104767012}
 --- !u!114 &-6226178088104767012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +347,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3853185501195300430}
   - component: {fileID: 2968409469134241080}
-  - component: {fileID: 1943981288070436890}
   m_Layer: 6
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -395,20 +408,3 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2692959246755313284}
---- !u!114 &1943981288070436890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8525454058570616284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: fb89a9e57e97f07488cc91b447cb769e, type: 2}

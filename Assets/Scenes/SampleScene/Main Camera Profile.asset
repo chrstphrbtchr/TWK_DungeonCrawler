@@ -15,13 +15,13 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.25
+    m_Value: 0.5
   xMultiplier:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.75
   yMultiplier:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.75
   center:
     m_OverrideState: 0
     m_Value: {x: 0.5, y: 0.5}
@@ -42,8 +42,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   threshold:
-    m_OverrideState: 0
-    m_Value: 0.9
+    m_OverrideState: 1
+    m_Value: 1
   intensity:
     m_OverrideState: 1
     m_Value: 2.5
@@ -86,7 +86,7 @@ MonoBehaviour:
     m_Value: 2
   intensity:
     m_OverrideState: 1
-    m_Value: 0.25
+    m_Value: 0.5
   response:
     m_OverrideState: 0
     m_Value: 0.8
