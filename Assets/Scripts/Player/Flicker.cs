@@ -9,7 +9,7 @@ public class Flicker : MonoBehaviour
 
     void Start()
     {
-        //StartCoroutine(FlickerLight());
+        StartCoroutine(FlickerLight());
     }
 
     IEnumerator FlickerLight()
@@ -20,15 +20,18 @@ public class Flicker : MonoBehaviour
         }
         while(!ScreenTransition.loadingScene)
         {
-            float rndIntensity = Random.Range(0.85f, 1.15f);
-            float rndOuterRad = Random.Range(3f, 3.75f);
-            float time = 0, maxTime = .75f;
+            float rndIntensity = Random.Range(0.8f, 1.2f), rndOuterRad = Random.Range(3f, 4f),
+                time = 0, maxTime = Random.Range(1.5f, 2.75f), oldIntensity = lite.intensity, 
+                oldOuterRad = lite.pointLightOuterRadius;
+
             while(time <= maxTime)
             {
-                lite.intensity = Mathf.Lerp(lite.intensity, rndOuterRad, time/maxTime);
-                lite.pointLightOuterRadius = Mathf.Lerp(lite.pointLightOuterRadius, rndOuterRad, time/maxTime);
+                lite.intensity = Mathf.Lerp(oldIntensity, rndIntensity, time/maxTime);
+                lite.pointLightOuterRadius = Mathf.Lerp(oldOuterRad, rndOuterRad, time/maxTime);
+                time += Time.deltaTime;
+                yield return null;
             }
-            yield return new WaitForSeconds(Random.Range(0.25f, 1.25f));
+            yield return new WaitForSeconds(Random.Range(0.25f, 1.75f));
         }
         yield return null;
     }
