@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Skeleton : MultiStateEnemy
 {
-    public BoxCollider2D box;
+    public BoxCollider2D senseBox, bodyBox;
 
     [SerializeField] Sprite skeleSprite;
     [SerializeField] Sprite bonesSprite;
@@ -109,7 +109,7 @@ public class Skeleton : MultiStateEnemy
 
     IEnumerator IntoAggro()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             spRend.sprite = skeleSprite;
             yield return new WaitForSeconds(0.125f);
@@ -118,18 +118,18 @@ public class Skeleton : MultiStateEnemy
         }
         yield return new WaitForSeconds(0.025f);
         spRend.sprite = skeleSprite;
-
+        bodyBox.isTrigger = false;
         aggro = true;
         doneSpawning = true;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        box.size = new Vector2(bcOn, bcOn);
+        senseBox.size = new Vector2(bcOn, bcOn);
         yield return null;
     }
 
     IEnumerator OutOfAggro()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        box.size = new Vector2(bcOff, bcOff);
+        senseBox.size = new Vector2(bcOff, bcOff);
 
         for (int i = 0; i < 4; i++)
         {
@@ -141,6 +141,7 @@ public class Skeleton : MultiStateEnemy
         }
         yield return new WaitForSeconds(0.025f);
         spRend.sprite = bonesSprite;
+        bodyBox.isTrigger = true;
         aggro = false;
         doneSpawning = false;
         yield return null;

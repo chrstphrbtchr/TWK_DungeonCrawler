@@ -53,7 +53,7 @@ public class Ghost : MultiStateEnemy
     {
         doneSpawning = false;
         sprite = GetComponent<SpriteRenderer>();
-        speed = 0.5f;
+        speed = 0.6f;
         timeTilMove = 0;
         timeTilMoveMax = 0;
         aggro = true;
@@ -95,7 +95,7 @@ public class Ghost : MultiStateEnemy
             alpha = Mathf.Clamp01(alpha);
             Color fixedAlpha = new Color(sprite.color.r, sprite.color.g, sprite.color.b, alpha);
             sprite.color = fixedAlpha;
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.175f);
         }
 
         alpha = (fadeOut ? 0 : transparentThreshold);

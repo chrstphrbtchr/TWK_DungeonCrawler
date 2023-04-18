@@ -9,7 +9,7 @@ public class Flicker : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(FlickerLight());
+        //StartCoroutine(FlickerLight());
     }
 
     IEnumerator FlickerLight()

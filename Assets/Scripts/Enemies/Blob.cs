@@ -6,7 +6,7 @@ public class Blob : Enemy
     private void Awake()
     {
         timeTilMove = 0;
-        moveTimeRange = new Vector2(0.25f, 2.1f);
+        moveTimeRange = new Vector2(0.25f, 1f);
         timeTilMoveMax = GetRandomMoveTime();
         speed = 83f;
         rb = GetComponent<Rigidbody2D>();

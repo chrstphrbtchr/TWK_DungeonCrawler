@@ -27,11 +27,14 @@ public class ScreenTransition : MonoBehaviour
     }
 
     IEnumerator Transition(bool intro)
-    {
+    { 
         beginTransition = false;
         loadingScene = true;
 
         float currentTime = 0;
+
+        yield return new WaitForSeconds(0.1f);
+
         while (currentTime < transitionTime)
         {
             currentTime += Time.deltaTime;

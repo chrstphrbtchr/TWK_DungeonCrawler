@@ -110,17 +110,17 @@ public class CharacterHandler : MonoBehaviour
         switch (t.tileNum)
         {
             case  2:
-            case 10: return new Vector2( 0.5f, -0.5f);
-            case  3: return new Vector2(   0f, -0.5f);
+            case 10: return new Vector2( 0.25f, -0.25f);
+            case  3: return new Vector2(   0f,  -0.25f);
             case  4:
-            case 11: return new Vector2(-0.5f, -0.5f);
-            case  5: return new Vector2( 0.5f,    0f);
-            case  6: return new Vector2(-0.5f,    0f);
+            case 11: return new Vector2(-0.25f, -0.25f);
+            case  5: return new Vector2( 0.25f,     0f);
+            case  6: return new Vector2(-0.25f,     0f);
             case  7:
-            case 12: return new Vector2( 0.5f,  0.5f);
-            case  8: return new Vector2(   0f,  0.5f);
+            case 12: return new Vector2( 0.25f,  0.25f);
+            case  8: return new Vector2(    0f,  0.25f);
             case  9:
-            case 13: return new Vector2(-0.5f,  0.5f);
+            case 13: return new Vector2(-0.25f,  0.25f);
             default: return Vector2.zero;
         }
     }

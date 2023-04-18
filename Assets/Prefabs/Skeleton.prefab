@@ -59,7 +59,8 @@ MonoBehaviour:
   timeTilMove: 0
   timeTilMoveMax: 0
   state: 0
-  box: {fileID: 8868422366375458563}
+  senseBox: {fileID: 8868422366375458563}
+  bodyBox: {fileID: 1941415776032075315}
   skeleSprite: {fileID: -2080469642, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
   bonesSprite: {fileID: -539384219, guid: 218746d70087005459d4bc72a0cd0d2d, type: 3}
 --- !u!212 &-6350931585303414152
@@ -170,7 +171,7 @@ MonoBehaviour:
   - {x: -0.125, y: -0.1875, z: 0}
   m_ShapePathHash: -2031697791
   m_Mesh: {fileID: 0}
-  m_InstanceId: 54872
+  m_InstanceId: 47164
 --- !u!61 &1941415776032075315
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -181,7 +182,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
