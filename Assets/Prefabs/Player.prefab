@@ -104,7 +104,7 @@ MonoBehaviour:
   m_NoiseProfile: {fileID: 11400000, guid: 8608ec81ee27a15488d33f9dad239e91, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0.125
-  m_FrequencyGain: 0.575
+  m_FrequencyGain: 0.25
   mNoiseOffsets: {x: 778.9116, y: -438.23422, z: 774.4062}
 --- !u!1 &4643697406996538259
 GameObject:
