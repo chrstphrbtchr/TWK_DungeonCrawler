@@ -11,13 +11,14 @@ public class CharacterHandler : MonoBehaviour
 
     public GameObject[] monsters;
 
-    public static int monstersToMake = 5;
+    public static int monstersToMake;
     Vector2 playerLocation;
 
     public void PlacePieces(List<Tile> places)
     {
         bool placed = false;
         Tile t = null;
+        monstersToMake = places.Count / 80;
         Vector2 temp = Vector2.zero, baseOffset = new Vector2(0.5f, 0.5f);
         PlacementHelper(player);
         PlacementHelper(key);
@@ -48,6 +49,11 @@ public class CharacterHandler : MonoBehaviour
         bool CheckValidity(Tile t, bool floorsOnly=false)
         {
             if (floorsOnly && t.tileNum != 1) return false;
+
+            if(player != null && Vector2.Distance(playerLocation, t.tileLoc) < 5)
+            {
+                return false;
+            }
 
             switch (t.tileNum)
             {
