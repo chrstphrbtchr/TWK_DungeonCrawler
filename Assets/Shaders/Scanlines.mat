@@ -50,7 +50,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaMult: 0.0075
+    - _AlphaMult: 0.0025
     - _EnableExternalAlpha: 0
     - _LinesAmount: 50
     - _Speed: 1.25

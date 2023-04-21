@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class ScreenTransition : MonoBehaviour
 {
-    public static bool loadingScene, beginTransition;
+    public static bool loadingScene, beginTransition, resetLevel;
     public Material transitionMat;
     private string progress = "_Progress";
     float threshold = 1.5f, transitionTime = 1.75f;
@@ -12,6 +12,7 @@ public class ScreenTransition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        resetLevel = false;
         beginTransition = false;
         transitionMat.SetFloat(progress, 0);
         StartCoroutine(Transition(true));
@@ -27,15 +28,15 @@ public class ScreenTransition : MonoBehaviour
     }
 
     IEnumerator Transition(bool intro)
-    { 
-        beginTransition = false;
+    {
         loadingScene = true;
+        beginTransition = false;
 
         float currentTime = 0;
 
         yield return new WaitForSeconds(0.1f);
 
-        while (currentTime < transitionTime)
+        while (currentTime < transitionTime && !resetLevel)
         {
             currentTime += Time.deltaTime;
             // if starting opaque
@@ -50,7 +51,7 @@ public class ScreenTransition : MonoBehaviour
             yield return null;
         }
 
-        if (!intro) SceneManager.LoadScene(0);
+        if (!intro || resetLevel) SceneManager.LoadScene(0);
         loadingScene = false;
     }
 }

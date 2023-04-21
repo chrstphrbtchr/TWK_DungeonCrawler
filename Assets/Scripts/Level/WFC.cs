@@ -33,7 +33,10 @@ public class WFC : MonoBehaviour
     private void Update()
     {
 #if UNITY_EDITOR
-        ResetEverything();
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            ResetEverything();
+        }
 #endif
     }
 
@@ -172,11 +175,14 @@ public class WFC : MonoBehaviour
         Fun();
     }
 
-    public static void ResetEverything()
+    public static void ResetEverything(bool emergencyReset=false)
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if(emergencyReset)
         {
-            //SceneManager.LoadScene(0);
+            ScreenTransition.resetLevel = true;
+        }
+        else
+        {
             ScreenTransition.beginTransition = true;
         }
     }

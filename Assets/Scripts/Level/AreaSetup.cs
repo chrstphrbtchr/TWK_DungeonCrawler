@@ -29,7 +29,7 @@ public class AreaSetup
         if( badTiles > (WFC.xLen >= WFC.yLen ? WFC.yLen : WFC.xLen) / 4)
         {
             Debug.LogWarningFormat("Reset due to <color=#261B23>{0}</color> uncollapsed tiles.", badTiles);
-            WFC.ResetEverything();
+            WFC.ResetEverything(emergencyReset: true);
         }
 
         return result;
