@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
+    public delegate void GotKey();
+    public static event GotKey OnKeyGet;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Player")
         {
             PlayerMove.keyGet = true;
+            OnKeyGet();
             Destroy(this.gameObject);
         }
     }
@@ -18,6 +22,7 @@ public class Key : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             PlayerMove.keyGet = true;
+            OnKeyGet();
             Destroy(this.gameObject);
         }
     }
