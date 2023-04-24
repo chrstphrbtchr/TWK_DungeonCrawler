@@ -16,7 +16,7 @@ TagManager:
   - Objects
   - NoPostPro
   - Transitions
-  - 
+  - Foregrouded
   - 
   - 
   - 
@@ -55,4 +55,7 @@ TagManager:
     locked: 0
   - name: Transitions
     uniqueID: 959419879
+    locked: 0
+  - name: Overlay
+    uniqueID: 3492645281
     locked: 0

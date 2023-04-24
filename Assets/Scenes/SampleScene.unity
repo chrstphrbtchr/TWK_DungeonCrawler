@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 238526639}
   - component: {fileID: 238526641}
   - component: {fileID: 238526640}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tilemap (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238526638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.26, y: 0.74, z: 0}
+  m_LocalPosition: {x: 0.26, y: 0.65, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -497,7 +497,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1735,7 +1735,7 @@ GameObject:
   - component: {fileID: 336002060}
   - component: {fileID: 336002062}
   - component: {fileID: 336002061}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tilemap (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1777,7 +1777,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3795,7 +3795,7 @@ GameObject:
   - component: {fileID: 412457810}
   - component: {fileID: 412457812}
   - component: {fileID: 412457811}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tilemap (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3837,7 +3837,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5257,7 +5257,7 @@ GameObject:
   - component: {fileID: 1184548979}
   - component: {fileID: 1184548981}
   - component: {fileID: 1184548980}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tilemap (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5299,7 +5299,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7179,7 +7179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1709150735}
   - component: {fileID: 1709150736}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8047,7 +8047,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 3000
+    maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -8313,8 +8313,8 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 100
-      minScalar: 10
+      scalar: 50
+      minScalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
