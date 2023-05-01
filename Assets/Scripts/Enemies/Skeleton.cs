@@ -62,7 +62,7 @@ public class Skeleton : MultiStateEnemy
         timeTilMove = 0;
         moveTimeRange = new Vector2(0.25f, 1f);
         timeTilMoveMax = GetRandomMoveTime();
-        speed = 130f;
+        speed = 100f;
         doneSpawning = false;
     }
 
@@ -109,12 +109,12 @@ public class Skeleton : MultiStateEnemy
 
     IEnumerator IntoAggro()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             spRend.sprite = skeleSprite;
-            yield return new WaitForSeconds(0.125f);
+            yield return new WaitForSeconds(0.15f);
             spRend.sprite = bonesSprite;
-            yield return new WaitForSeconds(0.125f);
+            yield return new WaitForSeconds(0.15f);
         }
         yield return new WaitForSeconds(0.025f);
         spRend.sprite = skeleSprite;
@@ -131,7 +131,7 @@ public class Skeleton : MultiStateEnemy
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         senseBox.size = new Vector2(bcOff, bcOff);
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             spRend.sprite = bonesSprite;
             yield return new WaitForSeconds(0.075f);

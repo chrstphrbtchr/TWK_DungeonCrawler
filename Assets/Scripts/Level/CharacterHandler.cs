@@ -16,6 +16,7 @@ public class CharacterHandler : MonoBehaviour
 
     public void PlacePieces(List<Tile> places)
     {
+        int rnd = Random.Range(0, 5);
         bool placed = false;
         Tile t = null;
         monstersToMake = places.Count / 80;
@@ -23,10 +24,11 @@ public class CharacterHandler : MonoBehaviour
         PlacementHelper(player);
         PlacementHelper(key);
         PlacementHelper(door);
-        PlacementHelper(shield);
+        if(rnd == 0) PlacementHelper(shield);
+
         for(int i = 0; i < monstersToMake; i++)
         {
-            int rnd = Random.Range(0, monsters.Length);
+            rnd = Random.Range(0, monsters.Length);
             PlacementHelper(monsters[rnd], (rnd >= 2 ? true : false));
         }
 
