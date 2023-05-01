@@ -5,10 +5,14 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public Animator shieldAnimator;
+
     Rigidbody2D rb;
     SpriteRenderer spriteRend;
+
     Vector2 movementInput;
     [SerializeField] float speed = 100;
+
     public static bool keyGet, shieldGet, iFrames;
 
     public delegate void ShieldDestroyer();
@@ -62,7 +66,7 @@ public class PlayerMove : MonoBehaviour
             shieldGet = false;
             StartCoroutine(Invincibility());
             OnShieldDestroyed();
-            // broken shield anim. part.
+            shieldAnimator.SetTrigger("Broken");
             return;
         }
         Destroy(this.gameObject);
@@ -81,6 +85,7 @@ public class PlayerMove : MonoBehaviour
             spriteRend.enabled = true;
         }
         iFrames = false;
+        shieldAnimator.ResetTrigger("Broken");
         yield return null;
     }
 }

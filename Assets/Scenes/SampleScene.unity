@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: d489c7409d776264b8bae7788ae3a844, type: 2}
+  img: {fileID: 0}
 --- !u!1 &238526638
 GameObject:
   m_ObjectHideFlags: 0
@@ -4833,7 +4834,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 
+  m_ApplyToSortingLayers: 00000000250df6a025a39aa8753593fb632017d2e7952f39a1892dd0
   m_LightCookieSprite: {fileID: 21300000, guid: 119f93d0bcbf1e743bf5fcf237507d39, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -5223,7 +5224,7 @@ MonoBehaviour:
   player: {fileID: 4643697406996538259, guid: 4b7ccedacd55dd049a5c70b93dd8d144, type: 3}
   door: {fileID: 7516061020022617218, guid: 46850ea656734a443b13ce4b8840a29d, type: 3}
   key: {fileID: 1252678246406197067, guid: 00dd06ca9bdb1e44d895448c17f52289, type: 3}
-  shield: {fileID: 0}
+  shield: {fileID: 1252678246406197067, guid: 1ba742f0528ade947b1d2ad44bb637a0, type: 3}
   monsters:
   - {fileID: 1252678246406197067, guid: 366a1644da59c2c43b3bda8219af8a34, type: 3}
   - {fileID: 1252678246406197067, guid: a3390fee2c91db04db4751707a79805d, type: 3}

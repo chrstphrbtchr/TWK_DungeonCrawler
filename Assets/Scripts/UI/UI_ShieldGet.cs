@@ -8,7 +8,15 @@ public class UI_ShieldGet : MonoBehaviour
 
     private void Awake()
     {
-        mat.SetInt("_GotItem", 0);
+        if (PlayerMove.shieldGet)
+        {
+            mat.SetFloat("_Progress", 0);
+        }
+        else
+        {
+            mat.SetFloat("_Progress", 1);
+        }
+        
     }
     private void OnEnable()
     {
@@ -24,11 +32,25 @@ public class UI_ShieldGet : MonoBehaviour
 
     void ItemPickup()
     {
-        mat.SetInt("_GotItem", 1);
+        mat.SetFloat("_Progress", 0);
     }
 
     void ItemLost()
     {
-        mat.SetInt("_GotItem", 0);
+        StartCoroutine(Dissolver());
+    }
+
+    IEnumerator Dissolver()
+    {
+        float prog = .25f;
+        while(prog < 1f)
+        {
+            mat.SetFloat("_Progress", prog);
+            prog += Time.deltaTime * 0.75f;
+            yield return new WaitForEndOfFrame();
+        }
+        mat.SetFloat("_Progress", 1);
+        yield return null; 
+
     }
 }

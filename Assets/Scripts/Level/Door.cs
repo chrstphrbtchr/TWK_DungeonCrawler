@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
+    public delegate void ItsLocked();
+    public static event ItsLocked OnDoorLocked;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag != "Player") return;
@@ -15,6 +18,7 @@ public class Door : MonoBehaviour
         else
         {
             Debug.Log("<color=#BF7959>It's locked...</color>");
+            OnDoorLocked();
         }
     }
 
@@ -28,6 +32,7 @@ public class Door : MonoBehaviour
         else
         {
             Debug.Log("<color=#BF7959>It's locked...</color>");
+            OnDoorLocked();
         }
     }
 }

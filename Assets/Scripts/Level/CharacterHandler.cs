@@ -23,6 +23,7 @@ public class CharacterHandler : MonoBehaviour
         PlacementHelper(player);
         PlacementHelper(key);
         PlacementHelper(door);
+        PlacementHelper(shield);
         for(int i = 0; i < monstersToMake; i++)
         {
             int rnd = Random.Range(0, monsters.Length);

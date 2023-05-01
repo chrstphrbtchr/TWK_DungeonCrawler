@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -6350931585303414152}
   - component: {fileID: 7245376286057959116}
   - component: {fileID: 1941415776032075315}
-  - component: {fileID: 289123674400107923}
+  - component: {fileID: 8446508561219691141}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -143,7 +143,7 @@ MonoBehaviour:
   - {x: -0.125, y: -0.1875, z: 0}
   m_ShapePathHash: -2031697791
   m_Mesh: {fileID: 0}
-  m_InstanceId: 124462
+  m_InstanceId: 51502
 --- !u!61 &1941415776032075315
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -168,9 +168,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.25}
+  m_Size: {x: 0.75, y: 0.75}
   m_EdgeRadius: 0
---- !u!114 &289123674400107923
+--- !u!114 &8446508561219691141
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,6 +179,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1252678246406197067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6624bf49624734ea300f382f95b870, type: 3}
+  m_Script: {fileID: 11500000, guid: 48095f99e97f8f342bc136401ec68b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
