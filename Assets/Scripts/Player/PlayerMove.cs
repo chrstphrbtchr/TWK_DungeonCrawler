@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D rb;
+    SpriteRenderer spriteRend;
     Vector2 movementInput;
     [SerializeField] float speed = 100;
-    public static bool keyGet;
+    public static bool keyGet, shieldGet, iFrames;
+
+    public delegate void ShieldDestroyer();
+    public static event ShieldDestroyer OnShieldDestroyed;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRend = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -50,8 +56,31 @@ public class PlayerMove : MonoBehaviour
 
     public void KillPlayer()
     {
+        if (iFrames) return;
+        if(shieldGet)
+        {
+            shieldGet = false;
+            StartCoroutine(Invincibility());
+            OnShieldDestroyed();
+            // broken shield anim. part.
+            return;
+        }
         Destroy(this.gameObject);
         Debug.Log("Y O U   H A V E   D I E D .");
         ScreenTransition.beginTransition = true;
+    }
+
+    IEnumerator Invincibility()
+    {
+        iFrames = true;
+        for(int i = 0; i < 3; i++)
+        {
+            yield return new WaitForSeconds(0.125f);
+            spriteRend.enabled = false;
+            yield return new WaitForSeconds(0.125f);
+            spriteRend.enabled = true;
+        }
+        iFrames = false;
+        yield return null;
     }
 }

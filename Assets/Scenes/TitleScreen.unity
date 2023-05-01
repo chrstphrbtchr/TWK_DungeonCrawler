@@ -1619,7 +1619,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 200
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -5888,7 +5888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -5968,30 +5968,6 @@ PrefabInstance:
     - target: {fileID: 3257263712883077321, guid: 4ccce437ffd2f7e448dc92e530407786, type: 3}
       propertyPath: m_VertexStreams.Array.data[2]
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3257263712883077322, guid: 4ccce437ffd2f7e448dc92e530407786, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.064524755
-      objectReference: {fileID: 0}
-    - target: {fileID: 3257263712883077322, guid: 4ccce437ffd2f7e448dc92e530407786, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.23468678
-      objectReference: {fileID: 0}
-    - target: {fileID: 3257263712883077322, guid: 4ccce437ffd2f7e448dc92e530407786, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.4716981
-      objectReference: {fileID: 0}
-    - target: {fileID: 3257263712883077322, guid: 4ccce437ffd2f7e448dc92e530407786, type: 3}
-      propertyPath: InitialModule.startColor.minColor.b
-      value: 0.20309716
-      objectReference: {fileID: 0}
-    - target: {fileID: 3257263712883077322, guid: 4ccce437ffd2f7e448dc92e530407786, type: 3}
-      propertyPath: InitialModule.startColor.minColor.g
-      value: 0.22751866
-      objectReference: {fileID: 0}
-    - target: {fileID: 3257263712883077322, guid: 4ccce437ffd2f7e448dc92e530407786, type: 3}
-      propertyPath: InitialModule.startColor.minColor.r
-      value: 0.26415092
       objectReference: {fileID: 0}
     - target: {fileID: 3257263712883077323, guid: 4ccce437ffd2f7e448dc92e530407786, type: 3}
       propertyPath: m_RootOrder
