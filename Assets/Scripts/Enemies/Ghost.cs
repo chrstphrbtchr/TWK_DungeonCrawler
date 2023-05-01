@@ -53,7 +53,7 @@ public class Ghost : MultiStateEnemy
     {
         doneSpawning = false;
         sprite = GetComponent<SpriteRenderer>();
-        speed = 0.6f;
+        speed = 0.666f;
         timeTilMove = 0;
         timeTilMoveMax = 0;
         aggro = true;
