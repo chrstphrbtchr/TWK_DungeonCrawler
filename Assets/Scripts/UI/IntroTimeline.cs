@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class IntroTimeline : MonoBehaviour
 {
     public TMP_Text txt;
+    public RectTransform collapse;
+    public Canvas sky;
+    public ParticleSystem rocks;
 
     string[] mcdog =
     {
@@ -20,29 +23,58 @@ public class IntroTimeline : MonoBehaviour
         "Monroe\nCounty\nDepartment\nof",
         "Monroe\nCounty\nDepartment\nof Games"
     };
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void StartMCDOG()
     {
         StartCoroutine(MCDOG());
     }
 
-    public IEnumerator MCDOG()
+    IEnumerator MCDOG()
     {
         for(int i = 0; i < mcdog.Length; i++)
         {
             txt.text = mcdog[i];
             yield return new WaitForSeconds(0.25f);
         }
+    }
+
+    public void StartDescent()
+    {
+        StartCoroutine (Skyfall());
+    }
+
+    IEnumerator Skyfall()
+    {
+        Vector3 startPos = sky.transform.position;
+        Vector3 endPos = startPos + new Vector3(0, 10, 0);
+        float timer = 0, maxTimer = 4.5f;
+        while(sky.transform.position.y < endPos.y)
+        {
+            sky.transform.position = Vector3.Lerp(startPos, endPos, timer/maxTimer);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    public void CollapseStart()
+    {
+        collapse.GetComponent<TMP_Text>().text = "Collapse!";
+        StartCoroutine(CollapseDrop());
+    }
+
+    IEnumerator CollapseDrop()
+    {
+        Vector3 startPos = collapse.anchoredPosition;
+        Vector3 endPos = new Vector3(0, 60, 0);
+        float timer = 0, maxTimer = 1f;
+        while (collapse.anchoredPosition.y > endPos.y)
+        {
+            collapse.anchoredPosition = Vector3.Lerp(startPos, endPos, timer / maxTimer);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        collapse.anchoredPosition = endPos;
+        rocks.Play();
+        yield return null;
     }
 }

@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 195300036}
   - component: {fileID: 195300035}
   - component: {fileID: 195300034}
+  - component: {fileID: 195300037}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -218,6 +219,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &195300037
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195300032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0.5
+  m_FrequencyGain: 0.25
+  mNoiseOffsets: {x: 249.25504, y: 607.08997, z: 790.348}
 --- !u!1 &238730359
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +491,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 491489310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -514,7 +532,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 11
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -824,7 +842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 60}
+  m_AnchoredPosition: {x: 0, y: 560}
   m_SizeDelta: {x: 952, y: 596}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &694695206
@@ -847,7 +865,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Collapse!
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ed32eb9197e8d644580028bdcbdce814, type: 2}
   m_sharedMaterial: {fileID: -4277015716205907788, guid: ed32eb9197e8d644580028bdcbdce814, type: 2}
@@ -1033,7 +1051,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 11
+  m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -1071,6 +1089,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1213118309 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3257263712883077322, guid: 4ccce437ffd2f7e448dc92e530407786, type: 3}
+  m_PrefabInstance: {fileID: 3257263711953456320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1298072853
 GameObject:
   m_ObjectHideFlags: 3
@@ -1507,8 +1530,12 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 8921812184030114746, guid: 517adc0f4c45e3245aaed6a5f129a6c4, type: 2}
     value: {fileID: 1792270471}
+  - key: {fileID: 6950382710637669838, guid: 517adc0f4c45e3245aaed6a5f129a6c4, type: 2}
+    value: {fileID: 491489311}
   m_ExposedReferences:
-    m_References: []
+    m_References:
+    - 72b06ff65c02e1c4da06c7ac5fda71cf: {fileID: 947717471}
+    - 449eb8155997bd44db659d334cedf372: {fileID: 518140263}
 --- !u!4 &1792270470
 Transform:
   m_ObjectHideFlags: 0
@@ -1539,12 +1566,42 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: 3d3c6d2aa2f7c4444ba72ff140cffc93, type: 2}
+    - {fileID: 11400000, guid: 53f4e7eadadc82f4fb99e552986ac7b0, type: 2}
+    - {fileID: 11400000, guid: 0ecf84ce720d5e945be649aa79dac3ba, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1792270472}
           m_TargetAssemblyTypeName: IntroTimeline, Assembly-CSharp
           m_MethodName: StartMCDOG
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1792270472}
+          m_TargetAssemblyTypeName: IntroTimeline, Assembly-CSharp
+          m_MethodName: StartDescent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1792270472}
+          m_TargetAssemblyTypeName: IntroTimeline, Assembly-CSharp
+          m_MethodName: CollapseStart
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1567,6 +1624,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txt: {fileID: 1859085203}
+  collapse: {fileID: 694695205}
+  sky: {fileID: 1740016398}
+  rocks: {fileID: 1213118309}
 --- !u!1 &1814483491
 GameObject:
   m_ObjectHideFlags: 0
