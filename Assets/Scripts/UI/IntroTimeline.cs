@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class IntroTimeline : MonoBehaviour
 {
     public TMP_Text txt;
+    public TMP_Text mortmt;
     public RectTransform collapse;
     public Canvas sky;
     public ParticleSystem rocks;
@@ -66,10 +67,15 @@ public class IntroTimeline : MonoBehaviour
     {
         Vector3 startPos = collapse.anchoredPosition;
         Vector3 endPos = new Vector3(0, 60, 0);
-        float timer = 0, maxTimer = 1f;
+        Color tpColor = mortmt.colorGradient.topLeft;
+        Color stColor = mortmt.colorGradient.bottomLeft;
+        Color enColor = new Color(1f, 235f / 255f, 223f / 255f, 1f);
+        float timer = 0, maxTimer = 0.575f;
         while (collapse.anchoredPosition.y > endPos.y)
         {
             collapse.anchoredPosition = Vector3.Lerp(startPos, endPos, timer / maxTimer);
+            Color temp = Color.Lerp(stColor,enColor,timer/maxTimer);
+            mortmt.colorGradient = new VertexGradient(tpColor, tpColor, temp, temp);
             timer += Time.deltaTime;
             yield return null;
         }
