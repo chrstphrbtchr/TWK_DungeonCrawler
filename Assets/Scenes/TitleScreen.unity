@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 600064718}
   - component: {fileID: 600064717}
   - component: {fileID: 600064716}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Transitions & Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1525,7 +1525,7 @@ GameObject:
   - component: {fileID: 815871341}
   - component: {fileID: 815871343}
   - component: {fileID: 815871342}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2156,7 +2156,7 @@ GameObject:
   - component: {fileID: 1727490741}
   - component: {fileID: 1727490743}
   - component: {fileID: 1727490742}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Scanlines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2233,7 +2233,7 @@ GameObject:
   - component: {fileID: 1740016398}
   - component: {fileID: 1740016397}
   - component: {fileID: 1740016396}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: Canvas - MCDOG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7280,7 +7280,7 @@ GameObject:
   - component: {fileID: 1859085202}
   - component: {fileID: 1859085204}
   - component: {fileID: 1859085203}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: MCDOG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7474,7 +7474,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 491489315}
+  m_Camera: {fileID: 1304643350}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -7482,8 +7482,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -770236317
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &1930171427
 RectTransform:
@@ -7493,7 +7493,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930171423}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 0.017770562, y: 0.017770562, z: 0.017770562}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -31,22 +31,18 @@ public class MainMenu : MonoBehaviour
         NavigateMenu();
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            switch (selectorNum)
-            {
-                default:
-                    break;
-            }
+            MakeSelection();
         }
     }
 
-    void MakeSelection(int choice)
+    void MakeSelection()
     {
-        switch(choice)
+        switch(selectorNum)
         {
             case 0:     // Start Game
                 // lower camera
                 // transition
-                //SceneManager.LoadScene(1);
+                SceneManager.LoadScene(1);
                 break;
             case 1:     // Options
                 // camera to right? -- OR -- open options UI on top
@@ -56,8 +52,10 @@ public class MainMenu : MonoBehaviour
                 break;
             case 3:     // Credits & Thanks
                 break;
-            default:    // Exit Game
+            case 4:     // Exit Game
                 Application.Quit();
+                break;
+            default:
                 break;
         }
     }
