@@ -27,7 +27,7 @@ public class Door : MonoBehaviour
         if (collision.gameObject.tag != "Player") return;
         if (PlayerMove.keyGet)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
         else
         {

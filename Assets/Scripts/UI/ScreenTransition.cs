@@ -51,7 +51,7 @@ public class ScreenTransition : MonoBehaviour
             yield return null;
         }
 
-        if (!intro || resetLevel) SceneManager.LoadScene(0);
+        if (!intro || resetLevel) SceneManager.LoadScene(1);
         loadingScene = false;
     }
 }
