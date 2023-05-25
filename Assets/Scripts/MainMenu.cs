@@ -78,7 +78,7 @@ public class MainMenu : MonoBehaviour
             selectorNum++;
         }
         selectorNum %= 5;
-        Debug.Log(selectorNum);
+        //Debug.Log(selectorNum);
         swords.transform.position = new Vector3(0, (selectorNum * swordDiff), 10);
     }
 }
