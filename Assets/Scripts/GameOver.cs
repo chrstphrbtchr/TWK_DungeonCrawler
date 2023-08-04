@@ -18,7 +18,10 @@ public class GameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(GameStateManager.currentState == GameStateManager.GameState.CharactersStopped)
+        {
+
+        }
     }
 
     public void RocksGoUp(float amount)
