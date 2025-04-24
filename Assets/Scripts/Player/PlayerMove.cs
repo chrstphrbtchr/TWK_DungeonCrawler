@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     SpriteRenderer spriteRend;
 
     Vector2 movementInput;
-    [SerializeField] float speed = 100;
+    float speed = 90f;
 
     public static bool keyGet, shieldGet, iFrames;
 

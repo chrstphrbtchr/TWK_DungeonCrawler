@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shieldAnimator: {fileID: 2233543743618964004}
-  speed: 225
+  speed: 50
 --- !u!212 &-8125655760366509255
 SpriteRenderer:
   m_ObjectHideFlags: 0
