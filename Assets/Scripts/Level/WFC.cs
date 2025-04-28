@@ -10,7 +10,7 @@ public class WFC : MonoBehaviour
     int times = xLen * yLen;
     int maxIterations = 300;
     [SerializeField] Sprite[] allSprites;
-    static Sprite[] staticAllSprites; // THIS SUCKS.
+    static Sprite[] staticAllSprites; // All sprites.
 
     public GameObject tile;
     public CharacterHandler characterHandler;
@@ -21,7 +21,7 @@ public class WFC : MonoBehaviour
 
     void Start()
     {
-        staticAllSprites = allSprites;  //yuck
+        staticAllSprites = allSprites;  
         TilesMaster.ResetValues();
         BuildLevel();
         WaveFunctionCollapse();
