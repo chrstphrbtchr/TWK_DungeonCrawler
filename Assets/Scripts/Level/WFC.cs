@@ -2,6 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// ----------------------
+// Wave Function Collapse script by Christopher Butcher
+// NOTE: This was created as part of a game jam that
+//       became a longer project, so apologies for the
+//       lack of comments!
+// ----------------------
+
 public class WFC : MonoBehaviour
 {
     const float spawnOffset = 0.5f;
