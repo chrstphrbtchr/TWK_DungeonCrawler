@@ -28,6 +28,7 @@ public class Skeleton : MultiStateEnemy
         while(timer < timeTilMoveMax)
         {
             rb.velocity = nextLocation * speed * Time.deltaTime;
+            //rb.AddForce(nextLocation * speed, ForceMode2D.Force);
             timer += Time.deltaTime;
         }
         timeTilMove = 0;

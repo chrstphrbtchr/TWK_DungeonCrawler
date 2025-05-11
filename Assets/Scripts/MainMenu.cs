@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
@@ -14,6 +15,8 @@ public class MainMenu : MonoBehaviour
     public MenuState state;
 
     public GameObject swords;
+    public PlayableDirector descend;
+    public ParticleSystem dust;
 
     const float swordDiff = -0.625f;
     public int selectorNum = 0;
@@ -42,7 +45,9 @@ public class MainMenu : MonoBehaviour
             case 0:     // Start Game
                 // lower camera
                 // transition
-                SceneManager.LoadScene(1);
+                descend.Play();
+                dust.Stop();
+                //SceneManager.LoadScene(1);
                 break;
             case 1:     // Options
                 // camera to right? -- OR -- open options UI on top

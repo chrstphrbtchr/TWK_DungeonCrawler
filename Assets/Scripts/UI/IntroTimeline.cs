@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class IntroTimeline : MonoBehaviour
@@ -82,5 +83,10 @@ public class IntroTimeline : MonoBehaviour
         collapse.anchoredPosition = endPos;
         rocks.Play();
         yield return null;
+    }
+
+    public void BeginGame()
+    {
+        SceneManager.LoadScene(1);  // Load scene after timeline plays.
     }
 }
