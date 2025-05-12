@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour
     public GameObject swords;
     public PlayableDirector descend;
     public ParticleSystem dust;
+    public GameObject optionsScreen, creditsScreen;
 
     const float swordDiff = -0.625f;
     public int selectorNum = 0;
@@ -37,9 +38,16 @@ public class MainMenu : MonoBehaviour
             if (inMenu)
             {
                 inMenu = false;
+                
                 // Close Menus
+                optionsScreen.SetActive(false); // in future, might want this to
+                creditsScreen.SetActive(false); // not simply shut off ALL menus
             }
-            MakeSelection();
+            else
+            {
+                MakeSelection();
+            }
+                
         }
     }
 
@@ -50,14 +58,23 @@ public class MainMenu : MonoBehaviour
             case 0:     // Start Game
                 // lower camera
                 // transition
+                state = MenuState.Main;
                 descend.Play();
                 dust.Stop();
                 //SceneManager.LoadScene(1);
                 break;
             case 1:     // Options
                 // camera to right? -- OR -- open options UI on top
+                state = MenuState.Options;
+                inMenu = true;
+                creditsScreen.SetActive(false);
+                optionsScreen.SetActive(true);
                 break;
             case 2:     // Credits & Thanks
+                state = MenuState.Credits;
+                inMenu = true;
+                creditsScreen.SetActive(true);
+                optionsScreen.SetActive(false);
                 break;
             case 3:     // Exit Game
                 Application.Quit();
