@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -23,12 +22,6 @@ public class MainMenu : MonoBehaviour
     public int selectorNum = 0;
     bool inMenu = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -40,6 +33,7 @@ public class MainMenu : MonoBehaviour
                 inMenu = false;
                 
                 // Close Menus
+                state = MenuState.Main;
                 optionsScreen.SetActive(false); // in future, might want this to
                 creditsScreen.SetActive(false); // not simply shut off ALL menus
             }
@@ -67,21 +61,20 @@ public class MainMenu : MonoBehaviour
                 // camera to right? -- OR -- open options UI on top
                 state = MenuState.Options;
                 inMenu = true;
-                creditsScreen.SetActive(false);
-                optionsScreen.SetActive(true);
                 break;
             case 2:     // Credits & Thanks
                 state = MenuState.Credits;
                 inMenu = true;
-                creditsScreen.SetActive(true);
-                optionsScreen.SetActive(false);
                 break;
             case 3:     // Exit Game
+                state = MenuState.Main;
                 Application.Quit();
                 break;
             default:
                 break;
         }
+        creditsScreen.SetActive(state == MenuState.Credits);
+        optionsScreen.SetActive(state == MenuState.Options);
     }
 
     void NavigateMenu()
