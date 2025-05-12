@@ -50,14 +50,6 @@ public class PlayerMove : MonoBehaviour
         rb.velocity = movementInput * speed * Time.deltaTime;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.collider.tag == "Enemy")
-        {
-            //KillPlayer();
-        }
-    }
-
     public void KillPlayer()
     {
         if (iFrames) return;
@@ -69,6 +61,9 @@ public class PlayerMove : MonoBehaviour
             shieldAnimator.SetTrigger("Broken");
             return;
         }
+        // TODO: Freeze all enemies (delegate?)
+        //       and player. Begin ROCKS trans-
+        //       ition. Display / update times.
         Destroy(this.gameObject);
         Debug.Log("Y O U   H A V E   D I E D .");
         ScreenTransition.beginTransition = true;
