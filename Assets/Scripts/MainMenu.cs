@@ -34,6 +34,11 @@ public class MainMenu : MonoBehaviour
         NavigateMenu();
         if(Input.GetKeyDown(KeyCode.Return))
         {
+            if (inMenu)
+            {
+                inMenu = false;
+                // Close Menus
+            }
             MakeSelection();
         }
     }
@@ -52,12 +57,9 @@ public class MainMenu : MonoBehaviour
             case 1:     // Options
                 // camera to right? -- OR -- open options UI on top
                 break;
-            case 2:     // Story
-
+            case 2:     // Credits & Thanks
                 break;
-            case 3:     // Credits & Thanks
-                break;
-            case 4:     // Exit Game
+            case 3:     // Exit Game
                 Application.Quit();
                 break;
             default:
@@ -75,14 +77,14 @@ public class MainMenu : MonoBehaviour
             }
             else
             {
-                selectorNum = 4;
+                selectorNum = 3;
             }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             selectorNum++;
         }
-        selectorNum %= 5;
+        selectorNum %= 4;
         //Debug.Log(selectorNum);
         swords.transform.position = new Vector3(0, (selectorNum * swordDiff), 10);
     }
